@@ -1,31 +1,39 @@
 @import '../../styles/variables';
 
 .table-list-container {
-    width: 85%;
-    height: 50vh;
-    overflow-y: scroll;
+	height: 50vh;
+	overflow-y: scroll;
+	width: 85%;
 }
 
-
 .table-row-styling {
-    display: flex;
-    line-height: 4em;
-    border-bottom: 1px solid $underlined-color;
+	border-bottom: 1px solid $underlined-color;
+	display: flex;
+	line-height: 4em;
+
+}
+
+.table-heading {
+	background-color: #fff;
+	position: sticky;
+	position: sticky;
+	top: 0;
 }
 
 .table-row-item-container {
-   width: 18%;
-   text-align: center;
-   font-size: $default-font-size;
+	font-size: $default-font-size;
+	text-align: center;
+	width: 18%;
+
+	&:first-child {
+		margin-left: 10px;
+		text-align: left;
+	}
 }
 
-.table-row-item-container:first-child {
-    text-align: left;
-    margin-left: 10px;
 
- }
 
 .table-column-title {
-    font-size: $default-font-size;
+	font-size: $default-font-size;
 
 }

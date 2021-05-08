@@ -9,14 +9,15 @@ const Table = ({ data, titles }) => {
 	return (
 		<div className='table-list-container'>
 			<ul className='table-list'>
-				<li className='table-row-styling'>
+				
+				<li className='table-row-styling table-heading'>
 					{titles?.map((title, index) => 
 						(<div className='table-row-item-container' key={index}>
 							<h2 className='table-column-title'>{title}</h2>
 						</div>))}
 				</li>
 				{data?.map(item => 
-					<li key={item.id} >
+					<li className='table-row-list-item' key={item.id} >
 						<a className='table-row-styling'>
 							<div className='table-row-item-container'>
 								<p>{item.name}</p>
