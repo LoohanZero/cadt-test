@@ -1,5 +1,7 @@
+@import '../../styles/variables';
+
 .aside-container {
-	background-color: #80c4b9;
+	background-color: $default-background-color;
 	box-sizing: border-box;
 	height: 100vh;
 	padding-top: 15%;
@@ -22,7 +24,7 @@
 	width: 100%;
 
 	&:hover {
-		background-color: #598981;
+		background-color: $hover-background-color;
 		color: #fff;
 		transition: 0.2s ease-in-out;
 	}

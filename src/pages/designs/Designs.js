@@ -13,7 +13,7 @@ const designsModel = { isLoading: false,
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
 		case 'isLoading':
-			return { ...state, isLoading: true };
+			return { ...state, isLoading: !state.isLoading };
 		case 'data':
 			return { ...state, data: action.payload };
 		default:
@@ -43,13 +43,12 @@ const Designs = () => {
 			dispatchDesings({ type: 'designs', payload: null });
 		};
 	}, [ ]);
-	// eslint-disable-next-line no-console
-	console.log(designs.isLoading, designs.data);
+
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
 				<div className='pages-loader'>
-					<GridLoader/>
+					<GridLoader color="#80c4b9" />
 				</div>
 			}
 			{!designs.isLoading && designs.data && <li></li>}
