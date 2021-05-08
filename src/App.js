@@ -4,19 +4,11 @@ import {
 	Redirect,
 	Route,
 	Switch,
-	useLocation
 } from 'react-router-dom';
 
 import Aside from './components/aside/Aside';
 import Designs from './pages/designs/Designs';
 import Setouts from './pages/setouts/Setouts';
-
-
-const LocationDisplay = () => {
-	const location = useLocation();
-  
-	return <div data-testid="location-display">{location.pathname}</div>;
-};
 
 function App() {
 	return (
@@ -36,11 +28,10 @@ function App() {
 					</Route>
 				</Switch>
 
-				<LocationDisplay />
 			</Router>
 			
 		</div>
 	);
 }
 
-export { App, LocationDisplay };
+export default App;

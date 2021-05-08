@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Aside = () => {
 	return (
-		<aside>
+		<aside className='aside-container'>
 			<Link to='/designs'>Designs</Link>
 			<Link to='/setouts'>Setouts</Link>
 		</aside>
