@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import '../pages.scss';
+
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
@@ -11,7 +13,7 @@ const designsModel = { isLoading: false,
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
 		case 'isLoading':
-			return { ...state, isLoading: !state.isLoading };
+			return { ...state, isLoading: true };
 		case 'data':
 			return { ...state, data: action.payload };
 		default:
@@ -44,11 +46,11 @@ const Designs = () => {
 	// eslint-disable-next-line no-console
 	console.log(designs.isLoading, designs.data);
 	return (
-		<main clasName=''>
+		<main className='pages-main-container'>
 			{designs.isLoading && 
-			<div>
-				<GridLoader/>
-			</div>
+				<div className='pages-loader'>
+					<GridLoader/>
+				</div>
 			}
 			{!designs.isLoading && designs.data && <li></li>}
             
