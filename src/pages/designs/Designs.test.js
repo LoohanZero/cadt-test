@@ -17,7 +17,7 @@ test('renders content', () => {
 
 
 
-test('loads items eventually', async () => {
+test('calls GetDesign function once', async () => {
 	render(<Designs/>);
   
 	const mockAPI = window.fetch.mockResolvedValueOnce({

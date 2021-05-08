@@ -4,20 +4,21 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
+import { Table } from '../../components/table/Table';
+import { ACTIONS, designsModel } from '../../services/actions';
 import { getDesignData } from '../../services/getData';
-
-const designsModel = { isLoading: false, 
-	data: null, 
-	error: null };
 
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
-		case 'isLoading':
-			return { ...state, isLoading: !state.isLoading };
-		case 'data':
-			return { ...state, data: action.payload };
+		case ACTIONS.SET_IS_LOADING:
+			return { ...state, 
+				isLoading: !state.isLoading };
+		case ACTIONS.GET_DESIGN_DATA:
+			return { ...state, 
+				data: action.payload };
 		default:
-			return { ...state, error: new Error() };
+			return { ...state, 
+				error: new Error() };
 	}
 };
 
@@ -27,12 +28,16 @@ const Designs = () => {
 
 
 	const getDesigns = async () => {
-		dispatchDesings({ type: 'isLoading' });
+		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 
 		const designsInformation = await getDesignData();
 		
-		dispatchDesings({ type: 'data', payload: designsInformation });
-		dispatchDesings({ type: 'isLoading' });
+		if (designsInformation instanceof Error) {
+			dispatchDesings();
+		} else{
+			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: designsInformation });
+		}
+		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 		
 	};
 
@@ -40,18 +45,18 @@ const Designs = () => {
 		getDesigns();
 
 		return () => {
-			dispatchDesings({ type: 'designs', payload: null });
+			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
 
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
-				<div className='pages-loader'>
+				<div data-testid="loader" className='pages-loader'>
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <li></li>}
+			{!designs.isLoading && designs.data && <Table data={designs}/>}
             
 		</main>
 	);
