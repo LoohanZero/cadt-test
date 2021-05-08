@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	BrowserRouter as Router,
+	Redirect,
 	Route,
 	Switch,
 	useLocation
@@ -30,8 +31,8 @@ function App() {
 					<Route exact path='/setouts'>
 						<Setouts/>
 					</Route>
-					<Route exact path='/setouts'>
-						<NoMatch/>
+					<Route>
+						<Redirect to='designs'/>
 					</Route>
 				</Switch>
 
