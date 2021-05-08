@@ -1,8 +1,38 @@
 .aside-container {
     height: 100vh;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     background-color: #80c4b9;
     width: 20%;
+    padding-top: 15%;
+}
+
+.aside-nav-links-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.aside-nav-link {
+    display: flex;
+    justify-content: center;
+    font-size: 1em; 
+    text-align: left;
+    width: 100%;
+    line-height: 40px;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #598981;
+        color: #FFF;
+        transition: 0.2s ease-in-out;
+    }
+}
+
+.selected {
+    background-color: #000;
+    color: #FFF;
+}
+
+.aside-nav-link-text {
+    width: 60px;
 }
