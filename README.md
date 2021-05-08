@@ -35,6 +35,7 @@ Components are separated in its own folder "components" and each one of them has
 
 Testing is done as requested with React Testing Library and Jest. They are done before functional components to see them failing first (and make sure they are working) and then as the component is built, make sure they are passing.
 Not gonna lie here, this is my first time applying testing to a React app and I know I have a lot to study still but I'm doing them as complete and deep as I possibly can with the knowledge I have.
+In the Designs page I tried firts to do the column title's through de json so I tried a reducer (it worked), but then I thought I had to capitalize every first letter and add spaces to the titles and decided against it (it seemed complicating it too much) and made an enum with the hardcoded names in an array.
 
 
 ## Styles
