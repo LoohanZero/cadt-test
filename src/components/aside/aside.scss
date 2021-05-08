@@ -1,4 +1,8 @@
 .aside-container {
     height: 100vh;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #80c4b9;
+    width: 20%;
 }

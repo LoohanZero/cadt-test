@@ -1,3 +1,5 @@
+import './main.scss';
+
 import React from 'react';
 import {
 	BrowserRouter as Router,
