@@ -3,9 +3,19 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Switch,
+	useLocation
 } from 'react-router-dom';
 
 import Aside from './components/aside/Aside';
+import Designs from './pages/designs/Designs';
+import Setouts from './pages/setouts/Setouts';
+
+
+const LocationDisplay = () => {
+	const location = useLocation();
+  
+	return <div data-testid="location-display">{location.pathname}</div>;
+};
 
 function App() {
 	return (
@@ -14,13 +24,22 @@ function App() {
 				<Aside/>
         
 				<Switch>
-					<Route exact path='/designs' ></Route>
-					<Route exact path='/setouts'></Route>
+					<Route exact path='/designs' >
+						<Designs/>
+					</Route>
+					<Route exact path='/setouts'>
+						<Setouts/>
+					</Route>
+					<Route exact path='/setouts'>
+						<NoMatch/>
+					</Route>
 				</Switch>
+
+				<LocationDisplay />
 			</Router>
 			
 		</div>
 	);
 }
 
-export default App;
+export { App, LocationDisplay };
