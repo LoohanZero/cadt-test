@@ -16,9 +16,9 @@
 
 .aside-nav-link {
 	display: flex;
-	font-size: 1em;
+	font-size: $default-font-size;
 	justify-content: center;
-	line-height: 40px;
+	line-height: $default-line-height;
 	text-align: left;
 	transition: 0.2s ease-in-out;
 	width: 100%;

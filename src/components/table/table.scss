@@ -1,4 +1,31 @@
-.table-heading-list-item {
+@import '../../styles/variables';
+
+.table-list-container {
+    width: 85%;
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+
+.table-row-styling {
     display: flex;
+    line-height: 4em;
+    border-bottom: 1px solid $underlined-color;
+}
+
+.table-row-item-container {
+   width: 18%;
+   text-align: center;
+   font-size: $default-font-size;
+}
+
+.table-row-item-container:first-child {
+    text-align: left;
+    margin-left: 10px;
+
+ }
+
+.table-column-title {
+    font-size: $default-font-size;
 
 }
