@@ -2,7 +2,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import '@testing-library/jest-dom/extend-expect';
 
-import { fireEvent,render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Link, Router } from 'react-router-dom';
@@ -13,6 +13,7 @@ test('renders aside', () => {
 	const component = render(<App />);
 	
 	component.container.querySelector('aside');
+	
 });
 
 it('routes to a new route', async () => {
