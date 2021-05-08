@@ -2,11 +2,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 import '@testing-library/jest-dom/extend-expect';
 
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent,render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { Link, Router } from 'react-router-dom';
 
 import App from './App';
 
@@ -16,17 +15,19 @@ test('renders aside', () => {
 	component.container.querySelector('aside');
 });
 
-test('full app rendering/navigating', () => {
+it('routes to a new route', async () => {
 	const history = createMemoryHistory();
-	render(
+
+	history.push = jest.fn();
+
+	const { getByText } = render(
 		<Router history={history}>
-			<App />
-		</Router>);
+			<Link to="/designs">Designs</Link>
+		</Router>
+	);
 
-	expect(screen.getByText(/You are on the setout page/i)).toBeInTheDocument();
+	fireEvent.click(getByText('Designs'));
 
-	const leftClick = { button: 0 };
-	userEvent.click(screen.getByText(/designs/i), leftClick);
 
-	expect(screen.getByText(/You are on the designs page/i)).toBeInTheDocument();
+	expect(history.push).toHaveBeenCalledWith('/designs');
 });
