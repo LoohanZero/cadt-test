@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom/extend-expect';
@@ -9,7 +10,7 @@ import Designs from './Designs.js';
 
 beforeAll(() => jest.spyOn(window, 'fetch'));
 
-test('renders content', () => {
+test('renders list', () => {
 	const component = render(<Designs/>);
 
 	component.container.querySelector('ul');
@@ -18,8 +19,9 @@ test('renders content', () => {
 
 
 test('calls GetDesign function once', async () => {
-	render(<Designs/>);
-  
+	await act(async () => {
+		render(<Designs/>);
+	});
 	const mockAPI = window.fetch.mockResolvedValueOnce({
 		ok: true,
 		json: async () => ({ success: true }),
@@ -28,3 +30,4 @@ test('calls GetDesign function once', async () => {
 	await waitFor(() => expect(mockAPI).toHaveBeenCalledTimes(1));
 	await waitFor(() => expect(mockAPI).toHaveBeenCalledWith('/designs'));
 });
+

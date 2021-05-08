@@ -4,9 +4,10 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
-import { Table } from '../../components/table/Table';
-import { ACTIONS, designsModel } from '../../services/actions';
+import Table from '../../components/table/Table';
+import { ACTIONS, designsModel, TITLES } from '../../services/actions';
 import { getDesignData } from '../../services/getData';
+
 
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
@@ -16,6 +17,9 @@ const reducerDesigns = (state, action) => {
 		case ACTIONS.GET_DESIGN_DATA:
 			return { ...state, 
 				data: action.payload };
+		case ACTIONS.SET_ERROR:
+			return { ...state, 
+				error: new Error() };
 		default:
 			return { ...state, 
 				error: new Error() };
@@ -33,7 +37,7 @@ const Designs = () => {
 		const designsInformation = await getDesignData();
 		
 		if (designsInformation instanceof Error) {
-			dispatchDesings();
+			dispatchDesings({ type: ACTIONS.SET_ERROR });
 		} else{
 			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: designsInformation });
 		}
@@ -56,7 +60,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <Table data={designs}/>}
+			{!designs.isLoading && designs.data && <Table data={designs.data} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);

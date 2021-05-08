@@ -4,7 +4,13 @@ const designsModel = { isLoading: false,
 
 const ACTIONS = {
 	SET_IS_LOADING: 'isLoading',
-	GET_DESIGN_DATA: 'data'
+	GET_DESIGN_DATA: 'data',
+	SET_ERROR: 'error'
 };
 
-export { ACTIONS, designsModel };
+const TITLES = {
+	DESIGNS: [ 'Name', 'Courses', 'Wale', 'Last Updated', 'By' ], 
+	SETOUTS: [ 'Name', 'Machine Name', 'Machine Width', 'Courses', 'Last Updated' ]
+};
+
+export { ACTIONS, designsModel, TITLES };
