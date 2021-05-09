@@ -3,22 +3,20 @@ import './table.scss';
 import React from 'react';
 
 
-
 const Table = ({ origin, data, titles }) => {
 
 	return (
 		<div className='table-list-container'>
 			<ul className='table-list'>
-				
 				<li className='table-row-styling table-heading'>
-					{titles?.map((title, index) => 
+					{titles?.map((title, index) =>
 						(<div className='table-row-item-container' key={index}>
 							<h2 className='table-column-title'>{title}</h2>
 						</div>))}
 				</li>
-				{data?.map(item => 
+				{data?.map(item =>
 					<li className='table-row-list-item' key={item.id} >
-						<a className='table-row-styling'>
+						<a className='table-row-styling table-row-link'>
 							<div className='table-row-item-container'>
 								<p>{item.name}</p>
 							</div>
@@ -32,7 +30,7 @@ const Table = ({ origin, data, titles }) => {
 								<p>{origin ? item.courses : item.updated}</p>
 							</div>
 							<div className='table-row-item-container'>
-								{origin ? <p>{item.updated}</p> : 
+								{origin ? <p>{item.updated}</p> :
 									<div className='table-name-circle'>
 										<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
 									</div>}
@@ -40,7 +38,6 @@ const Table = ({ origin, data, titles }) => {
 						</a>
 					</li>)}
 			</ul>
-            
 		</div>
 	);
 };
