@@ -14,7 +14,7 @@ import Setouts from './pages/setouts/Setouts';
 
 function App() {
 	return (
-		<div className="App">
+		<div className="app-container">
 			<Router>
 				<Aside/>
         
