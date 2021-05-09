@@ -4,7 +4,7 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
-import Table from '../../components/list/List';
+import List from '../../components/list/List';
 import { dataModel, TITLES,TYPES } from '../../services/enums';
 import { getDesignData, getUsersData } from '../../services/getData';
 
@@ -91,7 +91,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <Table data-testid='data-list' data={designs.data} titles={TITLES.DESIGNS} />}
+			{!designs.isLoading && designs.data && <List data={designs.data} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);

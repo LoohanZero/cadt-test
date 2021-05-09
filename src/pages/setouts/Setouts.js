@@ -4,8 +4,8 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
-import Table from '../../components/table/Table';
-import { dataModel, TITLES,TYPES } from '../../services/actions';
+import List from '../../components/list/List';
+import { dataModel, TITLES,TYPES } from '../../services/enums';
 import { getSetoutsData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
@@ -71,7 +71,7 @@ const Setouts = () => {
 				<GridLoader color="#80c4b9" />
 			</div>
 			}
-			{!setouts.isLoading && setouts.data && <Table origin='setouts' data={setouts.data} titles={TITLES.SETOUTS} />}
+			{!setouts.isLoading && setouts.data && <List origin='setouts' data={setouts.data} titles={TITLES.SETOUTS} />}
 		</main>
 	);
 };

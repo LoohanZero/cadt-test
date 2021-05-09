@@ -3,7 +3,7 @@ import './list.scss';
 import React from 'react';
 
 
-const Table = ({ origin, data, titles }) => {
+const List = ({ origin, data, titles }) => {
 	
 	return (
 		<div className='main-list-container'>
@@ -42,4 +42,4 @@ const Table = ({ origin, data, titles }) => {
 	);
 };
 
-export default Table;
+export default List;

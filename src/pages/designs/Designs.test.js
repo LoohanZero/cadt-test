@@ -19,9 +19,8 @@ test('renders list', () => {
 
 
 test('calls GetDesign and GetUsers functions once each', async () => {
-	await act(async () => {
-		render(<Designs/>);
-	});
+	render(<Designs/>);
+
 	const mockAPI = window.fetch.mockResolvedValueOnce({
 		ok: true,
 		json: async () => ({ success: true }),
