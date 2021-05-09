@@ -4,7 +4,7 @@ import React from 'react';
 
 
 
-const Table = ({ data, titles }) => {
+const Table = ({ origin, data, titles }) => {
 
 	return (
 		<div className='table-list-container'>
@@ -23,18 +23,19 @@ const Table = ({ data, titles }) => {
 								<p>{item.name}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<p>{item.courses}</p>
+								<p>{origin ? item.machine_name?.replaceAll('_', ' ') : item.courses}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<p>{item.wales}</p>
+								<p>{origin ? item.machine_width : item.wales}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<p>{item.updated}</p>
+								<p>{origin ? item.courses : item.updated}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<div className='table-name-circle'>
-									<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
-								</div>
+								{origin ? <p>{item.updated}</p> : 
+									<div className='table-name-circle'>
+										<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
+									</div>}
 							</div>
 						</a>
 					</li>)}

@@ -5,7 +5,7 @@ import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
 import Table from '../../components/table/Table';
-import { ACTIONS, designsModel, TITLES } from '../../services/actions';
+import { ACTIONS, dataModel, TITLES } from '../../services/actions';
 import { getDesignData, getUsersData } from '../../services/getData';
 
 const formatDateUpdate = design => {
@@ -28,10 +28,10 @@ const reducerDesigns = (state, action) => {
 				data: action.payload };
 		case ACTIONS.FORMAT_LAST_UPDATE_DATE:
 			return { ...state, 
-				data: state.data.map(formatDateUpdate) };
+				data: state.data?.map(formatDateUpdate) };
 		case ACTIONS.ADD_LAST_USER_UPDATE:
 			return { ...state, 
-				data: state.data.map(design => formatUpdateName(design, action.payload)) };
+				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
 		case ACTIONS.SET_ERROR:
 			return { ...state, 
 				error: new Error() };
@@ -43,7 +43,7 @@ const reducerDesigns = (state, action) => {
 
 	
 const Designs = () => {
-	const [ designs, dispatchDesings ] = useReducer(reducerDesigns, designsModel);
+	const [ designs, dispatchDesings ] = useReducer(reducerDesigns, dataModel);
 
 
 	const getDesigns = async () => {

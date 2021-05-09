@@ -1,11 +1,12 @@
-const designsModel = { isLoading: false, 
+const dataModel = { isLoading: false, 
 	data: null, 
 	error: null };
 
 const ACTIONS = {
 	SET_IS_LOADING: 'isLoading',
 	SET_DESIGN_DATA: 'data',
-	ADD_LAST_USER_UPDATEA: 'user',
+	SET_SETOUTS_DATA: 'setouts',
+	ADD_LAST_USER_UPDATE: 'user',
 	FORMAT_LAST_UPDATE_DATE: 'formatDate',
 	SET_ERROR: 'error'
 };
@@ -15,4 +16,4 @@ const TITLES = {
 	SETOUTS: [ 'Name', 'Machine Name', 'Machine Width', 'Courses', 'Last Updated' ]
 };
 
-export { ACTIONS, designsModel, TITLES };
+export { ACTIONS, dataModel, TITLES };
