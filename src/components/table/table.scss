@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .table-list-container {
-	max-height: 330px;
+	max-height: 325px;
 	overflow-y: scroll;
 	width: 85%;
 }
@@ -21,13 +21,15 @@
 }
 
 .table-row-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 	font-size: $default-font-size;
-	text-align: center;
 	width: 18%;
 
 	&:first-child {
 		margin-left: 10px;
-		text-align: left;
+        justify-content: flex-start;
 	}
 }
 
@@ -36,4 +38,15 @@
 .table-column-title {
 	font-size: $default-font-size;
 
+}
+
+.table-name-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: $default-background-color;
+    border-radius: 50%;
+    color: #fff;
 }

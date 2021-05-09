@@ -74,8 +74,7 @@ const Designs = () => {
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 	};
 
-	// eslint-disable-next-line no-console
-	console.log(designs);
+
 	useEffect(() => {
 		getDesigns();
 		getUsers();

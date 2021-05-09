@@ -32,7 +32,9 @@ const Table = ({ data, titles }) => {
 								<p>{item.updated}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<p>{}</p>
+								<div className='table-name-circle'>
+									<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
+								</div>
 							</div>
 						</a>
 					</li>)}
