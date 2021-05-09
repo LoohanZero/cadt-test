@@ -4,8 +4,9 @@ const designsModel = { isLoading: false,
 
 const ACTIONS = {
 	SET_IS_LOADING: 'isLoading',
-	GET_DESIGN_DATA: 'data',
-	GET_USERS_DATA: 'users',
+	SET_DESIGN_DATA: 'data',
+	ADD_LAST_USER_UPDATEA: 'user',
+	FORMAT_LAST_UPDATE_DATE: 'formatDate',
 	SET_ERROR: 'error'
 };
 

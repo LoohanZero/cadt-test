@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .table-list-container {
-	height: 50vh;
+	max-height: 330px;
 	overflow-y: scroll;
 	width: 85%;
 }

@@ -29,7 +29,10 @@ const Table = ({ data, titles }) => {
 								<p>{item.wales}</p>
 							</div>
 							<div className='table-row-item-container'>
-								<p>{item.updated.toLocaleString()}</p>
+								<p>{item.updated}</p>
+							</div>
+							<div className='table-row-item-container'>
+								<p>{}</p>
 							</div>
 						</a>
 					</li>)}

@@ -8,17 +8,30 @@ import Table from '../../components/table/Table';
 import { ACTIONS, designsModel, TITLES } from '../../services/actions';
 import { getDesignData, getUsersData } from '../../services/getData';
 
+const formatDateUpdate = design => {
+	const formattedDate = new Date(design.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
+	return { ...design, updated: formattedDate };
+};
+
+const formatUpdateName = (design, users) => {
+	const userName = users?.filter(user => user.id === design.user_id_last_update);
+	return { ...design, user_name_last_update: userName[0].name };
+};
 
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
 		case ACTIONS.SET_IS_LOADING:
 			return { ...state, 
 				isLoading: !state.isLoading };
-		case ACTIONS.GET_DESIGN_DATA:
+		case ACTIONS.SET_DESIGN_DATA:
 			return { ...state, 
 				data: action.payload };
-		case ACTIONS.GET_USERS_DATA:
-			return { ...state, users: action.payload };
+		case ACTIONS.FORMAT_LAST_UPDATE_DATE:
+			return { ...state, 
+				data: state.data.map(formatDateUpdate) };
+		case ACTIONS.ADD_LAST_USER_UPDATE:
+			return { ...state, 
+				data: state.data.map(design => formatUpdateName(design, action.payload)) };
 		case ACTIONS.SET_ERROR:
 			return { ...state, 
 				error: new Error() };
@@ -28,7 +41,7 @@ const reducerDesigns = (state, action) => {
 	}
 };
 
-
+	
 const Designs = () => {
 	const [ designs, dispatchDesings ] = useReducer(reducerDesigns, designsModel);
 
@@ -41,8 +54,8 @@ const Designs = () => {
 		if (designsInformation instanceof Error) {
 			dispatchDesings({ type: ACTIONS.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: designsInformation });
-			
+			dispatchDesings({ type: ACTIONS.SET_DESIGN_DATA, payload: designsInformation });
+			dispatchDesings({ type: ACTIONS.FORMAT_LAST_UPDATE_DATE });
 		}
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 		
@@ -56,11 +69,13 @@ const Designs = () => {
 		if (usersInformation instanceof Error) {
 			dispatchDesings({ type: ACTIONS.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.GET_USERS_DATA, payload: usersInformation });
+			dispatchDesings({ type: ACTIONS.ADD_LAST_USER_UPDATE, payload: usersInformation });
 		}
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 	};
 
+	// eslint-disable-next-line no-console
+	console.log(designs);
 	useEffect(() => {
 		getDesigns();
 		getUsers();
@@ -68,8 +83,7 @@ const Designs = () => {
 			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-	// eslint-disable-next-line no-console
-	console.log(designs);
+	
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
