@@ -13,6 +13,11 @@
 
 }
 
+.table-row-link:hover {
+	background-color: $hover-row-background-color;
+	transition: $default-transition;
+}
+
 .table-heading {
 	background-color: #fff;
 	position: sticky;
