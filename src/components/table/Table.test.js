@@ -11,11 +11,11 @@ import Table from './Table';
 test('renders title list content', () => {
 	render(<Table/>);
 
-	screen.getByTitle('Name');
-	screen.getByTitle('Courses');
-	screen.getByTitle('Wales');
-	screen.getByTitle('Last Updated');
-	screen.getByTitle('By');
+	screen.findByTitle('Name');
+	screen.findByTitle('Courses');
+	screen.findByTitle('Wales');
+	screen.findByTitlewf('Last Updated');
+	screen.findByTitle('By');
 });
 
 
