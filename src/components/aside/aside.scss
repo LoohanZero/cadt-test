@@ -20,13 +20,13 @@
 	justify-content: center;
 	line-height: $default-line-height;
 	text-align: left;
-	transition: 0.2s ease-in-out;
+	transition: $default-transition;
 	width: 100%;
 
 	&:hover {
 		background-color: $hover-background-color;
 		color: #fff;
-		transition: 0.2s ease-in-out;
+		transition: $default-transition;
 	}
 }
 

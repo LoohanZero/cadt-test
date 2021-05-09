@@ -8,9 +8,12 @@ import Table from '../../components/table/Table';
 import { ACTIONS, dataModel, TITLES } from '../../services/actions';
 import { getDesignData, getUsersData } from '../../services/getData';
 
-const formatDateUpdate = design => {
-	const formattedDate = new Date(design.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
-	return { ...design, updated: formattedDate };
+const formatDateUpdate = setout => {
+	const formatDDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
+	const firstNumberIsZero = formatDDMMYY[0] === '0';
+	const DateDMMYY = firstNumberIsZero ? formatDDMMYY.slice(1) : formatDDMMYY;
+
+	return { ...setout, updated: DateDMMYY };
 };
 
 const formatUpdateName = (design, users) => {
