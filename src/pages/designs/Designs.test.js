@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom/extend-expect';
@@ -19,7 +18,7 @@ test('renders list', () => {
 
 
 
-test('calls GetDesign function once', async () => {
+test('calls GetDesign and GetUsers functions once each', async () => {
 	await act(async () => {
 		render(<Designs/>);
 	});
@@ -28,20 +27,7 @@ test('calls GetDesign function once', async () => {
 		json: async () => ({ success: true }),
 	});
 	
-	await waitFor(() => expect(mockAPI).toHaveBeenCalledTimes(1));
 	await waitFor(() => expect(mockAPI).toHaveBeenCalledWith('/designs'));
-});
-
-
-test('calls GetUsers function once', async () => {
-	await act(async () => {
-		render(<Designs/>);
-	});
-	const mockAPI = window.fetch.mockResolvedValueOnce({
-		ok: true,
-		json: async () => ({ success: true }),
-	});
-	
-	await waitFor(() => expect(mockAPI).toHaveBeenCalledTimes(1));
 	await waitFor(() => expect(mockAPI).toHaveBeenCalledWith('/users'));
+	expect(mockAPI).toHaveBeenCalledTimes(2);
 });

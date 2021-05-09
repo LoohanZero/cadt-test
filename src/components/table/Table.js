@@ -4,18 +4,18 @@ import React from 'react';
 
 
 const Table = ({ origin, data, titles }) => {
-
+	
 	return (
 		<div className='table-list-container'>
 			<ul className='table-list'>
-				<li className='table-row-styling table-heading'>
+				<li className='table-row-styling table-heading' >
 					{titles?.map((title, index) =>
 						(<div className='table-row-item-container' key={index}>
 							<h2 className='table-column-title'>{title}</h2>
 						</div>))}
 				</li>
 				{data?.map(item =>
-					<li className='table-row-list-item' key={item.id} >
+					<li className='table-row-list-item' key={item.id} data-testid='data-list-item' >
 						<a className='table-row-styling table-row-link'>
 							<div className='table-row-item-container'>
 								<p>{item.name}</p>
