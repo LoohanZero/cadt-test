@@ -9,11 +9,8 @@ import { ACTIONS, dataModel, TITLES } from '../../services/actions';
 import { getSetoutsData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
-	const formatDDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
-	const firstNumberIsZero = formatDDMMYY[0] === '0';
-	const DateDMMYY = firstNumberIsZero ? formatDDMMYY.slice(1) : formatDDMMYY;
-
-	return { ...setout, updated: DateDMMYY };
+	const formatDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'numeric' }).split(' ')[0];
+	return { ...setout, updated: formatDMMYY };
 };
 
 const reverseSetouts = data => {

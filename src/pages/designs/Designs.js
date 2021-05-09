@@ -9,11 +9,8 @@ import { ACTIONS, dataModel, TITLES } from '../../services/actions';
 import { getDesignData, getUsersData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
-	const formatDDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
-	const firstNumberIsZero = formatDDMMYY[0] === '0';
-	const DateDMMYY = firstNumberIsZero ? formatDDMMYY.slice(1) : formatDDMMYY;
-
-	return { ...setout, updated: DateDMMYY };
+	const formatDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'numeric' }).split(' ')[0];
+	return { ...setout, updated: formatDMMYY };
 };
 
 const formatUpdateName = (design, users) => {
@@ -36,10 +33,9 @@ const reducerDesigns = (state, action) => {
 			return { ...state, 
 				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
 		case ACTIONS.SET_ERROR:
-			return { ...state, 
-				error: new Error() };
 		default:
 			return { ...state, 
+			
 				error: new Error() };
 	}
 };
@@ -95,7 +91,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <Table data={designs.data} titles={TITLES.DESIGNS} />}
+			{!designs.isLoading && designs.data && <Table data-testid='data-list' data={designs.data} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);

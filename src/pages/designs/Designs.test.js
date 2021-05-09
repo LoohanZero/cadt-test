@@ -11,7 +11,7 @@ import Designs from './Designs.js';
 beforeAll(() => jest.spyOn(window, 'fetch'));
 
 test('renders list', () => {
-	const component = render(<Designs/>);
+	render(<Designs/>);
 
 	component.container.querySelector('ul');
 });
