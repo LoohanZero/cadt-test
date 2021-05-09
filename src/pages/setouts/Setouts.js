@@ -5,7 +5,7 @@ import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
 import Table from '../../components/table/Table';
-import { ACTIONS, dataModel, TITLES } from '../../services/actions';
+import { dataModel, TITLES,TYPES } from '../../services/actions';
 import { getSetoutsData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
@@ -20,18 +20,18 @@ const reverseSetouts = data => {
 
 const reducerSetouts = (state, action) => {
 	switch (action.type) {
-		case ACTIONS.SET_IS_LOADING:
+		case TYPES.SET_IS_LOADING:
 			return { ...state,
 				isLoading: !state.isLoading };
-		case ACTIONS.SET_SETOUTS_DATA:
+		case TYPES.SET_SETOUTS_DATA:
 			return { ...state,
 				data: action.payload };
-		case ACTIONS.FORMAT_LAST_UPDATE_DATE:
+		case TYPES.FORMAT_LAST_UPDATE_DATE:
 			return { ...state,
 				data: state.data?.map(formatDateUpdate) };
-		case ACTIONS.RESORT_SETOUTS:
+		case TYPES.RESORT_SETOUTS:
 			return { ...state, data: reverseSetouts(state.data) };
-		case ACTIONS.SET_ERROR:
+		case TYPES.SET_ERROR:
 			return { ...state,
 				error: new Error() };
 		default:
@@ -45,23 +45,23 @@ const Setouts = () => {
 
 
 	const getSetouts = async () => {
-		dispatchSetouts({ type: ACTIONS.SET_IS_LOADING });
+		dispatchSetouts({ type: TYPES.SET_IS_LOADING });
 
 		const designsInformation = await getSetoutsData();
 		if (designsInformation instanceof Error) {
-			dispatchSetouts({ type: ACTIONS.SET_ERROR });
+			dispatchSetouts({ type: TYPES.SET_ERROR });
 		} else{
-			dispatchSetouts({ type: ACTIONS.SET_SETOUTS_DATA, payload: designsInformation });
-			dispatchSetouts({ type: ACTIONS.RESORT_SETOUTS });
-			dispatchSetouts({ type: ACTIONS.FORMAT_LAST_UPDATE_DATE });
+			dispatchSetouts({ type: TYPES.SET_SETOUTS_DATA, payload: designsInformation });
+			dispatchSetouts({ type: TYPES.RESORT_SETOUTS });
+			dispatchSetouts({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
 		}
-		dispatchSetouts({ type: ACTIONS.SET_IS_LOADING });
+		dispatchSetouts({ type: TYPES.SET_IS_LOADING });
 	};
 
 	useEffect(() => {
 		getSetouts();
 		return () => {
-			dispatchSetouts({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
+			dispatchSetouts({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
 	return (

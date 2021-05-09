@@ -2,7 +2,7 @@ const dataModel = { isLoading: false,
 	data: null,
 	error: null };
 	
-const ACTIONS = {
+const TYPES = {
 	SET_IS_LOADING: 'isLoading',
 	SET_DESIGN_DATA: 'data',
 	SET_SETOUTS_DATA: 'setouts',
@@ -17,4 +17,4 @@ const TITLES = {
 	SETOUTS: [ 'Name', 'Machine Name', 'Machine Width', 'Courses', 'Last Updated' ]
 };
 	
-export { ACTIONS, dataModel, TITLES };
+export { dataModel, TITLES, TYPES };

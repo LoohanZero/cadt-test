@@ -5,7 +5,7 @@ import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
 import Table from '../../components/list/List';
-import { ACTIONS, dataModel, TITLES } from '../../services/actions';
+import { dataModel, TITLES,TYPES } from '../../services/enums';
 import { getDesignData, getUsersData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
@@ -20,19 +20,19 @@ const formatUpdateName = (design, users) => {
 
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
-		case ACTIONS.SET_IS_LOADING:
+		case TYPES.SET_IS_LOADING:
 			return { ...state, 
 				isLoading: !state.isLoading };
-		case ACTIONS.SET_DESIGN_DATA:
+		case TYPES.SET_DESIGN_DATA:
 			return { ...state, 
 				data: action.payload };
-		case ACTIONS.FORMAT_LAST_UPDATE_DATE:
+		case TYPES.FORMAT_LAST_UPDATE_DATE:
 			return { ...state, 
 				data: state.data?.map(formatDateUpdate) };
-		case ACTIONS.ADD_LAST_USER_UPDATE:
+		case TYPES.ADD_LAST_USER_UPDATE:
 			return { ...state, 
 				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
-		case ACTIONS.SET_ERROR:
+		case TYPES.SET_ERROR:
 		default:
 			return { ...state, 
 			
@@ -46,31 +46,31 @@ const Designs = () => {
 
 
 	const getDesigns = async () => {
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 
 		const designsInformation = await getDesignData();
 		
 		if (designsInformation instanceof Error) {
-			dispatchDesings({ type: ACTIONS.SET_ERROR });
+			dispatchDesings({ type: TYPES.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.SET_DESIGN_DATA, payload: designsInformation });
-			dispatchDesings({ type: ACTIONS.FORMAT_LAST_UPDATE_DATE });
+			dispatchDesings({ type: TYPES.SET_DESIGN_DATA, payload: designsInformation });
+			dispatchDesings({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
 		}
 
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 	};
 
 	const getUsers = async () => {
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 
 		const usersInformation = await getUsersData();
 		
 		if (usersInformation instanceof Error) {
-			dispatchDesings({ type: ACTIONS.SET_ERROR });
+			dispatchDesings({ type: TYPES.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.ADD_LAST_USER_UPDATE, payload: usersInformation });
+			dispatchDesings({ type: TYPES.ADD_LAST_USER_UPDATE, payload: usersInformation });
 		}
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 
 	};
 
@@ -80,7 +80,7 @@ const Designs = () => {
 		getUsers();
 
 		return () => {
-			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
+			dispatchDesings({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
 
