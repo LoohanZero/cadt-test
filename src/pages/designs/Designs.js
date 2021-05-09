@@ -6,7 +6,7 @@ import GridLoader from 'react-spinners/GridLoader';
 
 import Table from '../../components/table/Table';
 import { ACTIONS, designsModel, TITLES } from '../../services/actions';
-import { getDesignData } from '../../services/getData';
+import { getDesignData, getUsersData } from '../../services/getData';
 
 
 const reducerDesigns = (state, action) => {
@@ -17,6 +17,8 @@ const reducerDesigns = (state, action) => {
 		case ACTIONS.GET_DESIGN_DATA:
 			return { ...state, 
 				data: action.payload };
+		case ACTIONS.GET_USERS_DATA:
+			return { ...state, users: action.payload };
 		case ACTIONS.SET_ERROR:
 			return { ...state, 
 				error: new Error() };
@@ -40,19 +42,34 @@ const Designs = () => {
 			dispatchDesings({ type: ACTIONS.SET_ERROR });
 		} else{
 			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: designsInformation });
+			
 		}
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
 		
 	};
 
+	const getUsers = async () => {
+		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+
+		const usersInformation = await getUsersData();
+		
+		if (usersInformation instanceof Error) {
+			dispatchDesings({ type: ACTIONS.SET_ERROR });
+		} else{
+			dispatchDesings({ type: ACTIONS.GET_USERS_DATA, payload: usersInformation });
+		}
+		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+	};
+
 	useEffect(() => {
 		getDesigns();
-
+		getUsers();
 		return () => {
 			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-
+	// eslint-disable-next-line no-console
+	console.log(designs);
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 

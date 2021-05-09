@@ -5,6 +5,7 @@ const designsModel = { isLoading: false,
 const ACTIONS = {
 	SET_IS_LOADING: 'isLoading',
 	GET_DESIGN_DATA: 'data',
+	GET_USERS_DATA: 'users',
 	SET_ERROR: 'error'
 };
 

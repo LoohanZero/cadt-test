@@ -8,4 +8,14 @@ const getDesignData = async () => {
 	}
 };
 
-export { getDesignData };
+const getUsersData = async () => {
+	try{
+		const response = await fetch('/users');
+		return await response.json();
+	}
+	catch (error) {
+		return new Error(error);
+	}
+};
+
+export { getDesignData, getUsersData };
