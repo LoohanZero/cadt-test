@@ -21,15 +21,15 @@
 }
 
 .table-row-item-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	align-items: center;
+	display: flex;
 	font-size: $default-font-size;
+	justify-content: center;
 	width: 18%;
 
 	&:first-child {
+		justify-content: flex-start;
 		margin-left: 10px;
-        justify-content: flex-start;
 	}
 }
 
@@ -41,12 +41,12 @@
 }
 
 .table-name-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: $default-background-color;
-    border-radius: 50%;
-    color: #fff;
+	align-items: center;
+	background-color: $default-background-color;
+	border-radius: 50%;
+	color: #fff;
+	display: flex;
+	height: 40px;
+	justify-content: center;
+	width: 40px;
 }
