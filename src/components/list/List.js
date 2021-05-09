@@ -1,4 +1,4 @@
-import './table.scss';
+import './list.scss';
 
 import React from 'react';
 
@@ -6,32 +6,32 @@ import React from 'react';
 const Table = ({ origin, data, titles }) => {
 	
 	return (
-		<div className='table-list-container'>
-			<ul className='table-list'>
-				<li className='table-row-styling table-heading' >
+		<div className='main-list-container'>
+			<ul>
+				<li className='list-row-styling list-heading' >
 					{titles?.map((title, index) =>
-						(<div className='table-row-item-container' key={index}>
-							<h2 className='table-column-title'>{title}</h2>
+						(<div className='list-row-item-container' key={index}>
+							<h2 className='list-column-title'>{title}</h2>
 						</div>))}
 				</li>
 				{data?.map(item =>
-					<li className='table-row-list-item' key={item.id} data-testid='data-list-item' >
-						<a className='table-row-styling table-row-link'>
-							<div className='table-row-item-container'>
+					<li className='list-row-list-item' key={item.id} data-testid='data-list-item' >
+						<a className='list-row-styling list-row-link'>
+							<div className='list-row-item-container'>
 								<p>{item.name}</p>
 							</div>
-							<div className='table-row-item-container'>
+							<div className='list-row-item-container'>
 								<p>{origin ? item.machine_name?.replaceAll('_', ' ') : item.courses}</p>
 							</div>
-							<div className='table-row-item-container'>
+							<div className='list-row-item-container'>
 								<p>{origin ? item.machine_width : item.wales}</p>
 							</div>
-							<div className='table-row-item-container'>
+							<div className='list-row-item-container'>
 								<p>{origin ? item.courses : item.updated}</p>
 							</div>
-							<div className='table-row-item-container'>
+							<div className='list-row-item-container'>
 								{origin ? <p>{item.updated}</p> :
-									<div className='table-name-circle'>
+									<div className='list-name-circle'>
 										<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
 									</div>}
 							</div>

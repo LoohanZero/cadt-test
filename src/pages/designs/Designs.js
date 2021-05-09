@@ -4,7 +4,7 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
-import Table from '../../components/table/Table';
+import Table from '../../components/list/List';
 import { ACTIONS, dataModel, TITLES } from '../../services/actions';
 import { getDesignData, getUsersData } from '../../services/getData';
 
@@ -60,8 +60,8 @@ const Designs = () => {
 			dispatchDesings({ type: ACTIONS.SET_DESIGN_DATA, payload: designsInformation });
 			dispatchDesings({ type: ACTIONS.FORMAT_LAST_UPDATE_DATE });
 		}
+
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
-		
 	};
 
 	const getUsers = async () => {
@@ -75,17 +75,19 @@ const Designs = () => {
 			dispatchDesings({ type: ACTIONS.ADD_LAST_USER_UPDATE, payload: usersInformation });
 		}
 		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+
 	};
 
 
 	useEffect(() => {
 		getDesigns();
 		getUsers();
+
 		return () => {
 			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-	
+
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
