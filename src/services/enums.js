@@ -20,8 +20,8 @@ const EDITION_TYPES = {
 	EDIT_LAST_UPDATE: 'updated',
 	EDIT_STATUS: 'status',
 	EDIT_USER_ID_LAST_UPDATE: 'user_id_last_update',
-	EDIT_MACHINE_NAME: 'machine_name',
-	EDIT_USER_NAME_LAST_UPDATE: 'user_id_last_update',
+	EDIT_USER_NAME_LAST_UPDATE: 'user_name_last_update',
+	EDIT_MACHINE_NAME: 'machine_ame',
 	EDIT_MACHINE_WIDTH: 'machine_width', 
 	SET_ERROR: 'error'
 };
