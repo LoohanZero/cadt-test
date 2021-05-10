@@ -5,8 +5,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TITLES } from '../../services/actions';
-import Table from './Table';
+import { TITLES } from '../../services/enums';
+import Table from './List';
 
 
 describe('renders titles in table when I pass different title lists', () => {
@@ -14,11 +14,11 @@ describe('renders titles in table when I pass different title lists', () => {
 
 		render(<Table titles={TITLES.DESIGNS} />);
 	
-		screen.getByText('Name');
-		screen.getByText('Courses');
-		screen.getByText('Wale');
-		screen.getByText('Last Updated');
-		screen.getByText('By');
+		expect(screen.queryByText('Name')).toBeInTheDocument();
+		expect(screen.queryByText('Courses')).toBeInTheDocument();
+		expect(screen.queryByText('Wale')).toBeInTheDocument();
+		expect(screen.queryByText('Last Updated')).toBeInTheDocument();
+		expect(screen.queryByText('By')).toBeInTheDocument();
 		expect(screen.queryByText('Machine Name')).not.toBeInTheDocument();
 		expect(screen.queryByText('Machine Width')).not.toBeInTheDocument();
 	});
@@ -27,12 +27,12 @@ describe('renders titles in table when I pass different title lists', () => {
 	test('renders title list content when I pass designs titles', () => {
 
 		render(<Table titles={TITLES.SETOUTS} />);
-	
-		screen.getByText('Name');
-		screen.getByText('Courses');
-		screen.getByText('Machine Name');
-		screen.getByText('Last Updated');
-		screen.getByText('Machine Width');
+
+		expect(screen.queryByText('Name')).toBeInTheDocument();
+		expect(screen.queryByText('Courses')).toBeInTheDocument();
+		expect(screen.queryByText('Machine Name')).toBeInTheDocument();
+		expect(screen.queryByText('Last Updated')).toBeInTheDocument();
+		expect(screen.queryByText('Machine Width')).toBeInTheDocument();
 		expect(screen.queryByText('Wale')).not.toBeInTheDocument();
 		expect(screen.queryByText('By')).not.toBeInTheDocument();
 
@@ -66,9 +66,9 @@ describe('renders data in table when I pass different data information', () => {
 		render(<Table data={designData} />);
 		const listitems = screen.getAllByTestId('data-list-item');
 	
-		screen.getByText('1/04/21');
-		screen.getByText('JD');
-		screen.getByText('MM');
+		expect(screen.queryByText('1/04/21')).toBeInTheDocument();
+		expect(screen.queryByText('JD')).toBeInTheDocument();
+		expect(screen.queryByText('MM')).toBeInTheDocument();
 		expect(listitems).toHaveLength(2);
 		expect(screen.queryByText('RSF 4 2 EL')).not.toBeInTheDocument();
 		expect(screen.queryByText('Setout')).not.toBeInTheDocument();
@@ -96,7 +96,7 @@ describe('renders data in table when I pass different data information', () => {
 		render(<Table data={setoutsData} />);
 		const listitems = screen.getAllByTestId('data-list-item');
 	
-		screen.getByText('27/03/21');
+		expect(screen.queryByText('27/03/21')).toBeInTheDocument();
 		expect(listitems).toHaveLength(2);
 		expect(screen.queryByText('JD')).not.toBeInTheDocument();
 		expect(screen.queryByText('Design')).not.toBeInTheDocument();

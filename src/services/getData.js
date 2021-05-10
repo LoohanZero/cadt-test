@@ -4,7 +4,7 @@ const getDesignData = async () => {
 		return await response.json();
 	}
 	catch (error) {
-		return new Error(error);
+		return error;
 	}
 };
 
@@ -14,7 +14,7 @@ const getSetoutsData = async () => {
 		return await response.json();
 	}
 	catch (error) {
-		return new Error(error);
+		return error;
 	}
 };
 
@@ -24,7 +24,7 @@ const getUsersData = async () => {
 		return await response.json();
 	}
 	catch (error) {
-		return new Error(error);
+		return error;
 	}
 };
 

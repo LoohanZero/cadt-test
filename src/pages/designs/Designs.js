@@ -4,16 +4,13 @@ import '../pages.scss';
 import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
-import Table from '../../components/table/Table';
-import { ACTIONS, dataModel, TITLES } from '../../services/actions';
+import List from '../../components/list/List';
+import { dataModel, TITLES,TYPES } from '../../services/enums';
 import { getDesignData, getUsersData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
-	const formatDDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'2-digit' }).split(' ')[0];
-	const firstNumberIsZero = formatDDMMYY[0] === '0';
-	const DateDMMYY = firstNumberIsZero ? formatDDMMYY.slice(1) : formatDDMMYY;
-
-	return { ...setout, updated: DateDMMYY };
+	const formatDMMYY = new Date(setout.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'numeric' }).split(' ')[0];
+	return { ...setout, updated: formatDMMYY };
 };
 
 const formatUpdateName = (design, users) => {
@@ -23,21 +20,19 @@ const formatUpdateName = (design, users) => {
 
 const reducerDesigns = (state, action) => {
 	switch (action.type) {
-		case ACTIONS.SET_IS_LOADING:
+		case TYPES.SET_IS_LOADING:
 			return { ...state, 
 				isLoading: !state.isLoading };
-		case ACTIONS.SET_DESIGN_DATA:
+		case TYPES.SET_DESIGN_DATA:
 			return { ...state, 
 				data: action.payload };
-		case ACTIONS.FORMAT_LAST_UPDATE_DATE:
+		case TYPES.FORMAT_LAST_UPDATE_DATE:
 			return { ...state, 
 				data: state.data?.map(formatDateUpdate) };
-		case ACTIONS.ADD_LAST_USER_UPDATE:
+		case TYPES.ADD_LAST_USER_UPDATE:
 			return { ...state, 
 				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
-		case ACTIONS.SET_ERROR:
-			return { ...state, 
-				error: new Error() };
+		case TYPES.SET_ERROR:
 		default:
 			return { ...state, 
 				error: new Error() };
@@ -50,42 +45,45 @@ const Designs = () => {
 
 
 	const getDesigns = async () => {
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 
 		const designsInformation = await getDesignData();
 		
 		if (designsInformation instanceof Error) {
-			dispatchDesings({ type: ACTIONS.SET_ERROR });
+			dispatchDesings({ type: TYPES.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.SET_DESIGN_DATA, payload: designsInformation });
-			dispatchDesings({ type: ACTIONS.FORMAT_LAST_UPDATE_DATE });
+			dispatchDesings({ type: TYPES.SET_DESIGN_DATA, payload: designsInformation });
+			dispatchDesings({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
 		}
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
-		
+
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 	};
 
 	const getUsers = async () => {
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
 
 		const usersInformation = await getUsersData();
 		
 		if (usersInformation instanceof Error) {
-			dispatchDesings({ type: ACTIONS.SET_ERROR });
+			dispatchDesings({ type: TYPES.SET_ERROR });
 		} else{
-			dispatchDesings({ type: ACTIONS.ADD_LAST_USER_UPDATE, payload: usersInformation });
+			dispatchDesings({ type: TYPES.ADD_LAST_USER_UPDATE, payload: usersInformation });
 		}
-		dispatchDesings({ type: ACTIONS.SET_IS_LOADING });
+		dispatchDesings({ type: TYPES.SET_IS_LOADING });
+
 	};
 
 
 	useEffect(() => {
 		getDesigns();
 		getUsers();
+
 		return () => {
-			dispatchDesings({ type: ACTIONS.GET_DESIGN_DATA, payload: null });
+			dispatchDesings({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-	
+	// eslint-disable-next-line no-console
+	console.log(designs);
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
@@ -93,7 +91,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <Table data={designs.data} titles={TITLES.DESIGNS} />}
+			{!designs.isLoading && designs.data && <List data={designs.data} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);
