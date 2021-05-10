@@ -1,0 +1,87 @@
+@import '../../styles/variables';
+
+.modal-background {
+	background-color: $modal-backdrop-color;
+	height: 100vh;
+	left: 0;
+	opacity: 0.8;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 10;
+}
+
+.modal-main-container {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 20;
+}
+
+.modal-container {
+	background-color: $modal-background-color;
+	border-radius: 5px;
+	box-sizing: border-box;
+	height: auto;
+	max-width: 350px;
+	min-width: 275px;
+	padding: 40px;
+	width: 75%;
+}
+
+.modal-title {
+	border-bottom: 1px solid $underlined-color;
+	color: $hover-background-color;
+	padding-bottom: 20px;
+}
+
+.modal-form-container {
+	display: flex;
+}
+
+.modal-labels-container,
+.modal-information-container {
+	display: flex;
+	flex-direction: column;
+	padding-top: 10px;
+}
+
+.modal-label,
+.modal-information-input {
+	line-height: 2.5em;
+}
+
+.modal-label {
+	font-weight: bold;
+}
+
+.modal-information-input {
+	border: none;
+	font-size: $default-font-size;
+	margin: auto;
+	margin-left: 35px;
+	text-transform: capitalize;
+	width: 100px;
+}
+
+.modal-submit-button-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.modal-submit-button {
+	background-color: $default-background-color;
+	border: none;
+	border-radius: 5px;
+	font-size: $default-font-size;
+	line-height: 2.5em;
+	margin-top: 20px;
+	width: 120px;
+}

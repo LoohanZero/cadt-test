@@ -2,6 +2,8 @@ import './list.scss';
 
 import React from 'react';
 
+import Modal from '../modal/Modal';
+
 
 const List = ({ origin, data, titles }) => {
 	const getInitials = name => {
@@ -24,7 +26,7 @@ const List = ({ origin, data, titles }) => {
 								<p>{item.name}</p>
 							</div>
 							<div className='list-row-item-container'>
-								<p>{origin ? item.machine_name?.replaceAll('_', ' ') : item.courses}</p>
+								<p>{origin ? item.machine_name : item.courses}</p>
 							</div>
 							<div className='list-row-item-container'>
 								<p>{origin ? item.machine_width : item.wales}</p>
@@ -41,6 +43,7 @@ const List = ({ origin, data, titles }) => {
 						</a>
 					</li>)}
 			</ul>
+			{<Modal page={origin} item={data} titles={titles} /> }
 		</div>
 	);
 };

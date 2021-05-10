@@ -5,7 +5,7 @@ import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
 import List from '../../components/list/List';
-import { dataModel, TITLES,TYPES } from '../../services/enums';
+import { dataModel, PAGES, TITLES, TYPES } from '../../services/enums';
 import { getDesignData, getUsersData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
@@ -16,6 +16,10 @@ const formatDateUpdate = setout => {
 const formatUpdateName = (design, users) => {
 	const userName = users?.filter(user => user.id === design.user_id_last_update);
 	return { ...design, user_name_last_update: userName[0].name };
+};
+
+const formatStatus = design => {
+	return { ...design, status: design.status.replaceAll('_', ' ').replaceAll('-', ' ') };
 };
 
 const reducerDesigns = (state, action) => {
@@ -32,6 +36,9 @@ const reducerDesigns = (state, action) => {
 		case TYPES.ADD_LAST_USER_UPDATE:
 			return { ...state, 
 				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
+		case TYPES.FORMAT_STATUS:
+			return { ...state, 
+				data: state.data?.map(design => formatStatus(design)) };
 		case TYPES.SET_ERROR:
 		default:
 			return { ...state, 
@@ -54,6 +61,7 @@ const Designs = () => {
 		} else{
 			dispatchDesings({ type: TYPES.SET_DESIGN_DATA, payload: designsInformation });
 			dispatchDesings({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
+			dispatchDesings({ type: TYPES.FORMAT_STATUS });
 		}
 
 		dispatchDesings({ type: TYPES.SET_IS_LOADING });
@@ -91,7 +99,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <List data={designs.data} titles={TITLES.DESIGNS} />}
+			{!designs.isLoading && designs.data && <List origin={PAGES.DESIGNS} data={designs.data} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);
