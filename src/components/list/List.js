@@ -4,10 +4,13 @@ import React from 'react';
 
 
 const List = ({ origin, data, titles }) => {
-	
+	const getInitials = name => {
+		return name.split(' ').map(word => word.charAt(0)).join('');
+	};
+
 	return (
 		<div className='main-list-container'>
-			<ul>
+			<ul data-testid='data-list'>
 				<li className='list-row-styling list-heading' >
 					{titles?.map((title, index) =>
 						(<div className='list-row-item-container' key={index}>
@@ -32,7 +35,7 @@ const List = ({ origin, data, titles }) => {
 							<div className='list-row-item-container'>
 								{origin ? <p>{item.updated}</p> :
 									<div className='list-name-circle'>
-										<p>{item.user_name_last_update?.split(' ').map(word => word.charAt(0)).join('')}</p>
+										<p>{item && item.user_name_last_update && getInitials(item.user_name_last_update)}</p>
 									</div>}
 							</div>
 						</a>

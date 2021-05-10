@@ -35,7 +35,6 @@ const reducerDesigns = (state, action) => {
 		case TYPES.SET_ERROR:
 		default:
 			return { ...state, 
-			
 				error: new Error() };
 	}
 };
@@ -83,7 +82,8 @@ const Designs = () => {
 			dispatchDesings({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-
+	// eslint-disable-next-line no-console
+	console.log(designs);
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 

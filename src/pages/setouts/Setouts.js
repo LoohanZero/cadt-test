@@ -32,10 +32,8 @@ const reducerSetouts = (state, action) => {
 		case TYPES.RESORT_SETOUTS:
 			return { ...state, data: reverseSetouts(state.data) };
 		case TYPES.SET_ERROR:
-			return { ...state,
-				error: new Error() };
 		default:
-			return { ...state,
+			return { ...state, 
 				error: new Error() };
 	}
 };
@@ -77,4 +75,5 @@ const Setouts = () => {
 };
 
 export default Setouts;
+export { reducerSetouts };
 

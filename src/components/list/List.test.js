@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TITLES } from '../../services/actions';
+import { TITLES } from '../../services/enums';
 import Table from './List';
 
 
