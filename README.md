@@ -36,7 +36,8 @@ Components are separated in its own folder "components" and each one of them has
 Testing is done as requested with React Testing Library and Jest. They are done before functional components to see them failing first (and make sure they are working) and then as the component is built, make sure they are passing.
 Not gonna lie here, this is my first time applying testing to a React app and I know I have a lot to study still but I'm doing them as complete and deep as I possibly can with the knowledge I have.
 In the Designs page I tried firts to do the column title's through de json so I tried a reducer (it worked), but then I thought I had to capitalize every first letter and add spaces to the titles and decided against it (it seemed complicating it too much) and made an enum with the hardcoded names in an array.
-
+I repeated the method on the Setouts page and decided to make the information perfectly legible before sending it to the List component so the logic would be only to display it, with barely logic except to show the modal.
+On the Modal I started doing a reducer but the dispatchs were all too similar so I decided that with a very simple and reusable function with useState I would arrive to the same result.
 
 ## Styles
 
