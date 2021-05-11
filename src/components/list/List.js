@@ -22,7 +22,7 @@ const List = ({ origin, data, users, titles }) => {
 
 	return (
 		<div className='main-list-container'>
-			<ul data-testid='data-list'>
+			<ul className='list-container' data-testid='data-list'>
 				<li className='list-row-styling list-heading' >
 					{titles?.map((title, index) =>
 						(<div className='list-row-item-container' key={index}>

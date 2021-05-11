@@ -7,6 +7,10 @@ body {
 	font-family: $default-font-family;
 	margin: 0;
 	padding: 0;
+
+	@media(max-width: $mobiles) {
+		font-size: 14px;
+	}
 }
 
 a {
