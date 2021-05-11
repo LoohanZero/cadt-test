@@ -14,7 +14,7 @@ const formatDateUpdate = setout => {
 };
 
 const resortDesigns = data => {
-	return data.sort((firstDesign, secondDesign) => new Date(firstDesign.updated) - new Date(secondDesign.updated));
+	return data.sort((firstDesign, secondDesign) => new Date(secondDesign.updated) - new Date(firstDesign.updated));
 };
 
 const formatUpdateName = (design, users) => {
@@ -39,11 +39,12 @@ const reducerDesigns = (state, action) => {
 				data: state.data?.map(formatDateUpdate) };
 		case TYPES.ADD_LAST_USER_UPDATE:
 			return { ...state, 
-				data: state.data?.map(design => formatUpdateName(design, action.payload)) };
+				data: state.data?.map(design => formatUpdateName(design, action.payload)),
+				users: action.payload };
 		case TYPES.FORMAT_STATUS:
 			return { ...state, 
 				data: state.data?.map(design => formatStatus(design)) };
-		case TYPES.RESORT_DESIGNS:
+		case TYPES.RESORT_DATA:
 			return { ...state, data: resortDesigns(state.data) };
 		case TYPES.SET_ERROR:
 		default:
@@ -66,6 +67,7 @@ const Designs = () => {
 			dispatchDesings({ type: TYPES.SET_ERROR });
 		} else{
 			dispatchDesings({ type: TYPES.SET_DESIGN_DATA, payload: designsInformation });
+			dispatchDesings({ type: TYPES.RESORT_DATA });
 			dispatchDesings({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
 			dispatchDesings({ type: TYPES.FORMAT_STATUS });
 		}

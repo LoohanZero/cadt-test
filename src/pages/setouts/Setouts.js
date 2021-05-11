@@ -35,7 +35,7 @@ const reducerSetouts = (state, action) => {
 		case TYPES.FORMAT_MACHINE_NAME:
 			return { ...state,
 				data: state.data?.map(formatMachineName) };
-		case TYPES.RESORT_SETOUTS:
+		case TYPES.RESORT_DATA:
 			return { ...state, data: reverseSetouts(state.data) };
 		case TYPES.SET_ERROR:
 		default:
@@ -56,7 +56,7 @@ const Setouts = () => {
 			dispatchSetouts({ type: TYPES.SET_ERROR });
 		} else{
 			dispatchSetouts({ type: TYPES.SET_SETOUTS_DATA, payload: designsInformation });
-			dispatchSetouts({ type: TYPES.RESORT_SETOUTS });
+			dispatchSetouts({ type: TYPES.RESORT_DATA });
 			dispatchSetouts({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
 			dispatchSetouts({ type: TYPES.FORMAT_MACHINE_NAME });
 		}

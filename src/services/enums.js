@@ -9,7 +9,7 @@ const TYPES = {
 	ADD_LAST_USER_UPDATE: 'user',
 	FORMAT_LAST_UPDATE_DATE: 'formatDate',
 	FORMAT_MACHINE_NAME: 'formatMachineName',
-	RESORT_SETOUTS: 'resortSetouts',
+	RESORT_DATA: 'resortData',
 	SET_ERROR: 'error'
 };
 
