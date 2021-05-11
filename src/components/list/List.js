@@ -6,7 +6,7 @@ import { PAGES } from '../../services/enums';
 import Modal from '../modal/Modal';
 
 
-const List = ({ origin, data, titles }) => {
+const List = ({ origin, data, users, titles }) => {
 	const [ isModalDisplayed, setIsModalDisplayed ] = useState(false);
 	const [ informationDisplayed, setInformationDisplayed ] = useState(false);
 
@@ -53,7 +53,7 @@ const List = ({ origin, data, titles }) => {
 						</a>
 					</li>)}
 			</ul>
-			{isModalDisplayed && <Modal page={origin} item={informationDisplayed} titles={titles} setIsModalDisplayed={setIsModalDisplayed} /> }
+			{isModalDisplayed && <Modal page={origin} item={informationDisplayed} users={users} titles={titles} setIsModalDisplayed={setIsModalDisplayed} /> }
 		</div>
 	);
 };

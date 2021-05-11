@@ -179,16 +179,6 @@
       "updated": "2021-03-24 08:24:53.965832",
       "user_id_last_update": 1,
       "wales": 149
-    },
-    {
-      "courses": 400,
-      "id": 21,
-      "name": "19th Design",
-      "status": "Finished",
-      "updated": "2021-05-11 12:38:29.909",
-      "user_id_last_update": null,
-      "wales": 100,
-      "user_name_last_update": "Maria Lujan Sanchez"
     }
   ],
   "setouts": [
@@ -351,32 +341,10 @@
       "machine_name": "RSJ_4_1_ON",
       "machine_width": 4000,
       "courses": 2000
-    },
-    {
-      "id": 21,
-      "updated": "2021-05-11 11:18:49.168",
-      "name": "19th Setout",
-      "machine_name": "RSJ 5 1",
-      "machine_width": 4000,
-      "courses": 1000
-    },
-    {
-      "id": 22,
-      "updated": "2021-05-11 11:19:37.701",
-      "name": "2nd Setout",
-      "machine_name": "RSJ 4 1 ON",
-      "machine_width": "1503333",
-      "courses": 300
     }
   ],
   "users": [
-    {
-      "id": 1,
-      "name": "Walter Doe"
-    },
-    {
-      "id": 2,
-      "name": "John Doe"
-    }
+    { "id": 1, "name": "Walter Doe" },
+    { "id": 2, "name": "John Doe" }
   ]
 }

@@ -99,6 +99,7 @@ const Designs = () => {
 		};
 	}, [ ]);
 
+
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
@@ -106,7 +107,7 @@ const Designs = () => {
 					<GridLoader color="#80c4b9" />
 				</div>
 			}
-			{!designs.isLoading && designs.data && <List origin={PAGES.DESIGNS} data={designs.data} titles={TITLES.DESIGNS} />}
+			{!designs.isLoading && designs.data && designs.users && <List origin={PAGES.DESIGNS} data={designs.data} users={designs.users} titles={TITLES.DESIGNS} />}
             
 		</main>
 	);
