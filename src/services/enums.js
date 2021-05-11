@@ -1,11 +1,13 @@
-const dataModel = { isLoading: false,
-	data: null,
+const dataModel = { 
+	isLoading: false,
+	designs: null, 
+	setouts: null,
+	users: null,
 	error: null };
 	
 const TYPES = {
 	SET_IS_LOADING: 'isLoading',
-	SET_DESIGN_DATA: 'data',
-	SET_SETOUTS_DATA: 'setouts',
+	SET_DATA: 'data',
 	ADD_LAST_USER_UPDATE: 'user',
 	FORMAT_LAST_UPDATE_DATE: 'formatDate',
 	FORMAT_MACHINE_NAME: 'formatMachineName',
@@ -21,7 +23,7 @@ const EDITION_TYPES = {
 	EDIT_STATUS: 'status',
 	EDIT_USER_ID_LAST_UPDATE: 'user_id_last_update',
 	EDIT_USER_NAME_LAST_UPDATE: 'user_name_last_update',
-	EDIT_MACHINE_NAME: 'machine_ame',
+	EDIT_MACHINE_NAME: 'machine_name',
 	EDIT_MACHINE_WIDTH: 'machine_width', 
 	SET_ERROR: 'error'
 };

@@ -1,54 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-console */
+
 import './modal.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
+import SettingsContext from '../../contexts/SettingsContext';
 import { EDITION_TYPES, PAGES } from '../../services/enums';
+import { checkIfStatusIsIncluded, checkIfUserIsInDB, updateDate } from '../../services/helpers';
 import { postData } from '../../services/postData';
 
-
-const checkIfStatusIsIncluded = titles => {
-	return [ ...titles, !titles.includes('Status') && 'Status' ];
-};
-
-const updateDate = () => {
-	const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits: 3 };
-	const today = new Date();
-	return new Intl.DateTimeFormat('sv-SE', options).format(today).toString().replace(',', '.');
-};
-
-const updateItemInformation= async (settings, page, users, setError) => {
-	if(page === PAGES.DESIGNS) {
-		const resultOfEdition = await editUsersInfomation(users, settings);
-		const body = { ...settings, 
-			updated: updateDate(), 
-			id: null, 
-			user_id_last_update: resultOfEdition.id 
-		};
-		console.log(body);
-
-		if(resultOfEdition instanceof Error) {
-			setError(true);
-			return;
-		}
-
-		delete body.user_name_last_update;
-		console.log(body);
-		
-		return await body;
-	}
-
-	return { ...settings, 
-		updated: updateDate(), 
-		id: null };
-};
-
-const checkIfUserIsInDB = (users, name) => {
-	return users.some(user => user.name.toLowerCase() === name.toLowerCase());
-};
 
 const editUsersInfomation = async (users, settings) => {
 	const isUserInDB = checkIfUserIsInDB(users, settings.user_name_last_update);
@@ -66,11 +28,37 @@ const editUsersInfomation = async (users, settings) => {
 	}
 };
 
+const updateItemInformation = async (settings, page, users, setError) => {
+	if(page === PAGES.DESIGNS) {
+		const resultOfEdition = await editUsersInfomation(users, settings);
+		const body = { ...settings, 
+			updated: updateDate(), 
+			id: null, 
+			user_id_last_update: resultOfEdition.id 
+		};
+
+		if(resultOfEdition instanceof Error) {
+			setError(true);
+			return;
+		}
+
+		delete body.user_name_last_update;
+		
+		return await body;
+	}
+
+	return { ...settings, 
+		updated: updateDate(), 
+		id: null };
+};
+
+
 
 const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 	const [ settings, setSettings ] = useState(item);
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ error, setError ] = useState(false);
+	const { setIsEdited } = useContext(SettingsContext);
 	const editPage = page.slice(0, -1);
 	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
 	const modalRef = useRef(null);
@@ -81,7 +69,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 		}
 	};
 
-	const changeEditValue = (type, value) => {
+	const changeEditValue = (type, value,) => {
 		setSettings({ ...settings, [type]: value });
 	};
 
@@ -91,7 +79,6 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 		setIsLoading(true);
 
 		const body = await updateItemInformation(settings, page, users, setError);
-
 		const sendDataInformation = body && await postData(page, body);
 
 		if(sendDataInformation instanceof Error) {
@@ -101,6 +88,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 	
 		setIsLoading(false);
 		setIsModalDisplayed(false);
+		setIsEdited(true);
 		
 	};
 
@@ -133,7 +121,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 								{page === PAGES.DESIGNS &&
                                 <>
                                 	{<input className='modal-information-input'onChange={event => changeEditValue(EDITION_TYPES.EDIT_COURSES, event.target.value)} defaultValue={settings.courses} type='number' min='0' required/> } 
-                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_WALES, event.target.value)} defaultValue={settings.wales} required />
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_WALES, event.target.value)} defaultValue={settings.wales} type='number' min='0' required />
                                 	<input className='modal-information-input' value={settings.updated} disabled />
                                 	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_USER_NAME_LAST_UPDATE, event.target.value)} defaultValue={settings.user_name_last_update} required />
                                 	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_STATUS, event.target.value)}defaultValue={settings.status} required />
