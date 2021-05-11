@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-console */
 import './modal.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
 import { EDITION_TYPES, PAGES } from '../../services/enums';
@@ -17,8 +18,14 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 	const [ settings, setSettings ] = useState(item);
 	const editPage = page.slice(0, -1);
 	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
+	const modalRef = useRef(null);
 
-
+	const handleClickOutside = event => {
+		if (modalRef.current && !modalRef.current.contains(event.target)) {
+			setIsModalDisplayed(false);
+		}
+	};
+    
 	const changeEditValue = (type, value) => {
 		setSettings({ ...settings, [type]: value });
 	};
@@ -29,10 +36,17 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 		setIsModalDisplayed(false);
 	};
 
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside, true);
+		return () => {
+			document.removeEventListener('click', handleClickOutside, true);
+		};
+	}, [  ]);
+
 	return (
 		<>
-			<div className='modal-main-container'>
-				<div className='modal-container'>
+			<div className='modal-main-container' >
+				<div className='modal-container' ref={modalRef}>
 					<div className='modal-title-container'>
 						<h3 className='modal-title'>Edit {editPage}</h3>
 						<a onClick ={() => setIsModalDisplayed(false)}>
