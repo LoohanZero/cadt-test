@@ -18,7 +18,7 @@ const reverseSetouts = data => {
 };
 
 const formatMachineName = setout => {
-	return { ...setout, machine_name: setout.machine_name.replaceAll('_', ' ') };
+	return { ...setout, machine_name: setout?.machine_name?.replaceAll('_', ' ') };
 };
 
 const reducerSetouts = (state, action) => {
@@ -57,8 +57,8 @@ const Setouts = () => {
 		} else{
 			dispatchSetouts({ type: TYPES.SET_SETOUTS_DATA, payload: designsInformation });
 			dispatchSetouts({ type: TYPES.RESORT_SETOUTS });
-			dispatchSetouts({ type: TYPES.FORMAT_MACHINE_NAME });
 			dispatchSetouts({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
+			dispatchSetouts({ type: TYPES.FORMAT_MACHINE_NAME });
 		}
 		dispatchSetouts({ type: TYPES.SET_IS_LOADING });
 	};
@@ -69,6 +69,7 @@ const Setouts = () => {
 			dispatchSetouts({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
+
 	return (
 		<main className='pages-main-container'>
 			{setouts.isLoading &&

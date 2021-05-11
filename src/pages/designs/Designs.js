@@ -15,11 +15,11 @@ const formatDateUpdate = setout => {
 
 const formatUpdateName = (design, users) => {
 	const userName = users?.filter(user => user.id === design.user_id_last_update);
-	return { ...design, user_name_last_update: userName[0].name };
+	return { ...design, user_name_last_update: userName[0]?.name };
 };
 
 const formatStatus = design => {
-	return { ...design, status: design.status.replaceAll('_', ' ').replaceAll('-', ' ') };
+	return { ...design, status: design.status?.replaceAll('_', ' ').replaceAll('-', ' ') };
 };
 
 const reducerDesigns = (state, action) => {
@@ -90,8 +90,7 @@ const Designs = () => {
 			dispatchDesings({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
-	// eslint-disable-next-line no-console
-	console.log(designs);
+
 	return (
 		<main className='pages-main-container'>
 			{designs.isLoading && 
