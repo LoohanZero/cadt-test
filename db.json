@@ -179,6 +179,15 @@
       "updated": "2021-03-24 08:24:53.965832",
       "user_id_last_update": 1,
       "wales": 149
+    },
+    {
+      "courses": 400,
+      "id": 21,
+      "name": "IMAGINA",
+      "status": "in progress",
+      "updated": "2021-05-11 17:38:35.405",
+      "user_id_last_update": 2,
+      "wales": 100
     }
   ],
   "setouts": [
@@ -341,10 +350,32 @@
       "machine_name": "RSJ_4_1_ON",
       "machine_width": 4000,
       "courses": 2000
+    },
+    {
+      "id": 21,
+      "updated": "2021-05-11 17:37:18.903",
+      "name": "Lujanera",
+      "machine_name": "REFORMATING",
+      "machine_width": 2000,
+      "courses": 50
+    },
+    {
+      "id": 22,
+      "updated": "2021-05-11 17:38:28.311",
+      "name": "10th Setout",
+      "machine_name": "IMAGINA",
+      "machine_width": 4000,
+      "courses": 2000
     }
   ],
   "users": [
-    { "id": 1, "name": "Walter Doe" },
-    { "id": 2, "name": "John Doe" }
+    {
+      "id": 1,
+      "name": "Walter Doe"
+    },
+    {
+      "id": 2,
+      "name": "John Doe"
+    }
   ]
 }

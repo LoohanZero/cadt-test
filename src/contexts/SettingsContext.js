@@ -3,30 +3,16 @@ import React, { createContext, useEffect, useReducer, useState } from 'react';
 
 import { dataModel, PAGES, TYPES } from '../services/enums';
 import { getDesignData, getSetoutsData,getUsersData } from '../services/getData';
-
+import { 
+	formatDateUpdate, 
+	formatMachineName, 
+	formatStatus, 
+	formatUpdateName,
+	orderInformation,
+	resortData } from '../services/helpers';
 const SettingsContext = createContext();
 
-const formatDateUpdate = item => {
-	const formatDMMYY = new Date(item.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'numeric' }).split(' ')[0];
-	return { ...item, updated: formatDMMYY };
-};
 
-const resortData = data => {
-	return data?.sort((firstDesign, secondDesign) => new Date(secondDesign.updated) - new Date(firstDesign.updated));
-};
-
-const formatMachineName = setout => {
-	return { ...setout, machine_name: setout?.machine_name?.replaceAll('_', ' ') };
-};
-
-const formatUpdateName = (design, users) => {
-	const userName = users?.filter(user => user.id === design.user_id_last_update);
-	return { ...design, user_name_last_update: userName[0]?.name };
-};
-
-const formatStatus = design => {
-	return { ...design, status: design.status?.replaceAll('_', ' ').replaceAll('-', ' ') };
-};
 
 const reducerData = (state, action) => {
 	switch (action.type) {
@@ -58,14 +44,6 @@ const reducerData = (state, action) => {
 			return { ...state, 
 				error: new Error() };
 	}
-};
-
-const orderInformation = (dispatchData, data, page) => {
-	dispatchData({ type: TYPES.SET_DATA, payload: { data: data, page: page } });
-	dispatchData({ type: TYPES.RESORT_DATA, payload: page });
-	dispatchData({ type: TYPES.FORMAT_LAST_UPDATE_DATE, payload: page });
-	page === PAGES.DESIGNS && dispatchData({ type: TYPES.FORMAT_STATUS });
-	page === PAGES.SETOUTS && dispatchData({ type: TYPES.FORMAT_MACHINE_NAME });
 };
 
 
