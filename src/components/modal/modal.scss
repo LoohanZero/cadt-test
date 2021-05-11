@@ -37,10 +37,20 @@
 
 }
 
-.modal-title {
+.modal-title-container {
 	border-bottom: 1px solid $underlined-color;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.modal-title {
 	color: $hover-background-color;
 	padding-bottom: 20px;
+}
+
+.modal-close-icon {
+	cursor: pointer;
 }
 
 .modal-form-container {
@@ -111,6 +121,7 @@
 	background-color: $default-background-color;
 	border: none;
 	border-radius: 5px;
+	cursor: pointer;
 	font-size: $default-font-size;
 	line-height: 2.5em;
 	margin-top: 20px;
