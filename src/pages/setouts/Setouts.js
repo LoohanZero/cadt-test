@@ -5,7 +5,7 @@ import React, { useEffect, useReducer } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 
 import List from '../../components/list/List';
-import { dataModel, TITLES,TYPES } from '../../services/enums';
+import { dataModel, PAGES, TITLES, TYPES } from '../../services/enums';
 import { getSetoutsData } from '../../services/getData';
 
 const formatDateUpdate = setout => {
@@ -17,6 +17,9 @@ const reverseSetouts = data => {
 	return data.sort((firstSetout, secondSetout) => new Date(secondSetout.updated) - new Date(firstSetout.updated));
 };
 
+const formatMachineName = setout => {
+	return { ...setout, machine_name: setout?.machine_name?.replaceAll('_', ' ') };
+};
 
 const reducerSetouts = (state, action) => {
 	switch (action.type) {
@@ -29,7 +32,10 @@ const reducerSetouts = (state, action) => {
 		case TYPES.FORMAT_LAST_UPDATE_DATE:
 			return { ...state,
 				data: state.data?.map(formatDateUpdate) };
-		case TYPES.RESORT_SETOUTS:
+		case TYPES.FORMAT_MACHINE_NAME:
+			return { ...state,
+				data: state.data?.map(formatMachineName) };
+		case TYPES.RESORT_DATA:
 			return { ...state, data: reverseSetouts(state.data) };
 		case TYPES.SET_ERROR:
 		default:
@@ -50,8 +56,9 @@ const Setouts = () => {
 			dispatchSetouts({ type: TYPES.SET_ERROR });
 		} else{
 			dispatchSetouts({ type: TYPES.SET_SETOUTS_DATA, payload: designsInformation });
-			dispatchSetouts({ type: TYPES.RESORT_SETOUTS });
+			dispatchSetouts({ type: TYPES.RESORT_DATA });
 			dispatchSetouts({ type: TYPES.FORMAT_LAST_UPDATE_DATE });
+			dispatchSetouts({ type: TYPES.FORMAT_MACHINE_NAME });
 		}
 		dispatchSetouts({ type: TYPES.SET_IS_LOADING });
 	};
@@ -62,6 +69,7 @@ const Setouts = () => {
 			dispatchSetouts({ type: TYPES.GET_DESIGN_DATA, payload: null });
 		};
 	}, [ ]);
+
 	return (
 		<main className='pages-main-container'>
 			{setouts.isLoading &&
@@ -69,7 +77,7 @@ const Setouts = () => {
 				<GridLoader color="#80c4b9" />
 			</div>
 			}
-			{!setouts.isLoading && setouts.data && <List origin='setouts' data={setouts.data} titles={TITLES.SETOUTS} />}
+			{!setouts.isLoading && setouts.data && <List origin={PAGES.SETOUTS} data={setouts.data} titles={TITLES.SETOUTS} />}
 		</main>
 	);
 };

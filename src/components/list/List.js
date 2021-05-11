@@ -1,11 +1,23 @@
 import './list.scss';
 
-import React from 'react';
+import React, { useState } from 'react';
+
+import { PAGES } from '../../services/enums';
+import Modal from '../modal/Modal';
 
 
-const List = ({ origin, data, titles }) => {
+const List = ({ origin, data, users, titles }) => {
+	const [ isModalDisplayed, setIsModalDisplayed ] = useState(false);
+	const [ informationDisplayed, setInformationDisplayed ] = useState(false);
+
 	const getInitials = name => {
 		return name.split(' ').map(word => word.charAt(0)).join('');
+	};
+
+
+	const displayInformation = item => {
+		setInformationDisplayed(item);
+		setIsModalDisplayed(true); 
 	};
 
 	return (
@@ -19,21 +31,21 @@ const List = ({ origin, data, titles }) => {
 				</li>
 				{data?.map(item =>
 					<li className='list-row-list-item' key={item.id} data-testid='data-list-item' >
-						<a className='list-row-styling list-row-link'>
+						<a onClick={() => displayInformation(item)} className='list-row-styling list-row-link'>
 							<div className='list-row-item-container'>
 								<p>{item.name}</p>
 							</div>
 							<div className='list-row-item-container'>
-								<p>{origin ? item.machine_name?.replaceAll('_', ' ') : item.courses}</p>
+								<p>{origin === PAGES.SETOUTS ? item.machine_name : item.courses}</p>
 							</div>
 							<div className='list-row-item-container'>
-								<p>{origin ? item.machine_width : item.wales}</p>
+								<p>{origin === PAGES.SETOUTS ? item.machine_width : item.wales}</p>
 							</div>
 							<div className='list-row-item-container'>
-								<p>{origin ? item.courses : item.updated}</p>
+								<p>{origin === PAGES.SETOUTS ? item.courses : item.updated}</p>
 							</div>
 							<div className='list-row-item-container'>
-								{origin ? <p>{item.updated}</p> :
+								{origin === PAGES.SETOUTS ? <p>{item.updated}</p> :
 									<div className='list-name-circle'>
 										<p>{item && item.user_name_last_update && getInitials(item.user_name_last_update)}</p>
 									</div>}
@@ -41,6 +53,7 @@ const List = ({ origin, data, titles }) => {
 						</a>
 					</li>)}
 			</ul>
+			{isModalDisplayed && <Modal page={origin} item={informationDisplayed} users={users} titles={titles} setIsModalDisplayed={setIsModalDisplayed} /> }
 		</div>
 	);
 };
