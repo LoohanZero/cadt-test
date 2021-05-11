@@ -1,9 +1,16 @@
+@import '../styles/variables';
+
 .pages-main-container {
 	align-items: center;
 	display: flex;
 	justify-content: center;
 	min-height: 100vh;
 	width: calc(100vw - 20%);
+
+	@media(max-width: $tablets) {
+		width: 100vw;
+	}
+
 }
 
 .pages-loader {
