@@ -9,12 +9,12 @@ import { Link, Router } from 'react-router-dom';
 
 import App from './App';
 
-test('renders aside', () => {
-	const component = render(<App />);
+// test('renders aside', () => {
+// 	const component = render(<App />);
 	
-	component.container.querySelector('aside');
+// 	component.container.querySelector('aside');
 	
-});
+// });
 
 it('routes to a new route', async () => {
 	const history = createMemoryHistory();

@@ -3,12 +3,12 @@
 /* eslint-disable no-console */
 import './modal.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
+import SettingsContext from '../../contexts/SettingsContext';
 import { EDITION_TYPES, PAGES } from '../../services/enums';
 import { postData } from '../../services/postData';
-
 
 const checkIfStatusIsIncluded = titles => {
 	return [ ...titles, !titles.includes('Status') && 'Status' ];
@@ -71,6 +71,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 	const [ settings, setSettings ] = useState(item);
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ error, setError ] = useState(false);
+	const { setIsEdited } = useContext(SettingsContext);
 	const editPage = page.slice(0, -1);
 	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
 	const modalRef = useRef(null);
@@ -91,7 +92,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 		setIsLoading(true);
 
 		const body = await updateItemInformation(settings, page, users, setError);
-
+		console.log(body);
 		const sendDataInformation = body && await postData(page, body);
 
 		if(sendDataInformation instanceof Error) {
@@ -101,6 +102,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 	
 		setIsLoading(false);
 		setIsModalDisplayed(false);
+		setIsEdited(true);
 		
 	};
 
