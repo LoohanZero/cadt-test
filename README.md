@@ -38,6 +38,8 @@ Not gonna lie here, this is my first time applying testing to a React app and I 
 In the Designs page I tried firts to do the column title's through de json so I tried a reducer (it worked), but then I thought I had to capitalize every first letter and add spaces to the titles and decided against it (it seemed complicating it too much) and made an enum with the hardcoded names in an array.
 I repeated the method on the Setouts page and decided to make the information perfectly legible before sending it to the List component so the logic would be only to display it, with barely logic except to show the modal.
 On the Modal I started doing a reducer but the dispatchs were all too similar so I decided that with a very simple and reusable function with useState I would arrive to the same result.
+When I started the modal to send the modified information back to de database I realized a context would have been better as the reducers all have similar calls (except for one or two) and the users information should be used as well in the modal when modifying the designs.
+
 
 ## Styles
 

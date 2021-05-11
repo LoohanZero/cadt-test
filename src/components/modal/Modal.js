@@ -7,20 +7,38 @@ import React, { useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
 import { EDITION_TYPES, PAGES } from '../../services/enums';
-// import { postData } from '../../services/postData';
+import { postData } from '../../services/postData';
 
 
 const checkIfStatusIsIncluded = titles => {
 	return [ ...titles, !titles.includes('Status') && 'Status' ];
 };
 
+const updateDate = () => {
+	const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits: 3 };
+	const today = new Date();
+	return new Intl.DateTimeFormat('sv-SE', options).format(today).toString().replace(',', '.');
+};
+
+const updateInformation= body => {
+	const setouts = { ...body, 
+		updated: updateDate(), 
+		id: null  };
+	const designs = { ...setouts,
+		user_id_last_update: null,
+	};
+	return designs;
+};
 
 const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 	const [ settings, setSettings ] = useState(item);
+	const [ isLoading, setIsLoading ] = useState(false);
+	const [ error, setError ] = useState(false);
 	const editPage = page.slice(0, -1);
 	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
 	const modalRef = useRef(null);
 	console.log(settings);
+
 	const handleClickOutside = event => {
 		if (modalRef.current && !modalRef.current.contains(event.target)) {
 			setIsModalDisplayed(false);
@@ -31,26 +49,25 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 		setSettings({ ...settings, [type]: value });
 	};
 
-	const updateDate = body => {
-		const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits: 3 };
-		const today = new Date();
-		const formattedDate = new Intl.DateTimeFormat('sv-SE', options).format(today);
-		console.log(formattedDate);
-		return { ...body, updated: formattedDate };
-	};
-
 	const sendEditedInformation = event => {
 		event.preventDefault();
+		setIsLoading(true);
 
 		if(page === PAGES.DESIGNS) {
 			console.log(settings);
 		}
-		const body = updateDate(settings);
+		const body = updateInformation(settings);
 
-		// const sendInformation = postData(page, body);
+		const sendInformation = postData(page, body);
 
+		if(sendInformation instanceof Error) {
+			setError(true);
+			return;
+		}
 		console.log(body);
+		setIsLoading(false);
 		setIsModalDisplayed(false);
+		
 	};
 
 	useEffect(() => {
@@ -59,7 +76,7 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 			document.removeEventListener('click', handleClickOutside, true);
 		};
 	}, [  ]);
-
+	
 	return (
 		<>
 			<div className='modal-main-container' >
@@ -97,8 +114,10 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
                                 </>}
 							</div>
 						</div>
+						{error && <p className='modal-error-text'>There was an error processing the information. Please, try again later.</p>}
 						<div className='modal-submit-button-container'>
-							<button className='modal-submit-button' type='submit'>Update</button>
+							{!isLoading ? <button className='modal-submit-button' type='submit'>Update</button> :
+								<button className='modal-submit-button' type='submit'>Processing submition</button>}
 						</div>
 					</form>
                     

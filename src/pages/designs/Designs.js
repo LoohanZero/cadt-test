@@ -13,6 +13,10 @@ const formatDateUpdate = setout => {
 	return { ...setout, updated: formatDMMYY };
 };
 
+const resortDesigns = data => {
+	return data.sort((firstDesign, secondDesign) => new Date(firstDesign.updated) - new Date(secondDesign.updated));
+};
+
 const formatUpdateName = (design, users) => {
 	const userName = users?.filter(user => user.id === design.user_id_last_update);
 	return { ...design, user_name_last_update: userName[0]?.name };
@@ -39,6 +43,8 @@ const reducerDesigns = (state, action) => {
 		case TYPES.FORMAT_STATUS:
 			return { ...state, 
 				data: state.data?.map(design => formatStatus(design)) };
+		case TYPES.RESORT_DESIGNS:
+			return { ...state, data: resortDesigns(state.data) };
 		case TYPES.SET_ERROR:
 		default:
 			return { ...state, 

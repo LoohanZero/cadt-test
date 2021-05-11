@@ -111,6 +111,11 @@
 	cursor: default;
 }
 
+.modal-error-text {
+    font-size: 15px;
+    color: $error-text-color;
+}
+
 .modal-submit-button-container {
 	display: flex;
 	justify-content: center;
