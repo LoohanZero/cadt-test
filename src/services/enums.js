@@ -35,5 +35,5 @@ const PAGES = {
 	DESIGNS: 'designs', 
 	SETOUTS: 'setouts'
 };
-	
+
 export { dataModel, EDITION_TYPES, PAGES, TITLES, TYPES };

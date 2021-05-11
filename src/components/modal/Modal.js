@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 
 import { EDITION_TYPES, PAGES } from '../../services/enums';
+// import { postData } from '../../services/postData';
 
 
 const checkIfStatusIsIncluded = titles => {
@@ -19,20 +20,36 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 	const editPage = page.slice(0, -1);
 	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
 	const modalRef = useRef(null);
-
+	console.log(settings);
 	const handleClickOutside = event => {
 		if (modalRef.current && !modalRef.current.contains(event.target)) {
 			setIsModalDisplayed(false);
 		}
 	};
-    
+
 	const changeEditValue = (type, value) => {
 		setSettings({ ...settings, [type]: value });
+	};
+
+	const updateDate = body => {
+		const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits: 3 };
+		const today = new Date();
+		const formattedDate = new Intl.DateTimeFormat('sv-SE', options).format(today);
+		console.log(formattedDate);
+		return { ...body, updated: formattedDate };
 	};
 
 	const sendEditedInformation = event => {
 		event.preventDefault();
 
+		if(page === PAGES.DESIGNS) {
+			console.log(settings);
+		}
+		const body = updateDate(settings);
+
+		// const sendInformation = postData(page, body);
+
+		console.log(body);
 		setIsModalDisplayed(false);
 	};
 
@@ -53,7 +70,7 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 							<GrClose className='modal-close-icon' />
 						</a>
 					</div>
-					<form className='modal-form' action={event=>sendEditedInformation(event)} method='POST'>
+					<form className='modal-form' onSubmit={event=>sendEditedInformation(event)} action='' method='POST'>
 						<div className='modal-form-container'>
 							<div className='modal-labels-container'>
 								{modalTitles.map((title, index) => 
@@ -62,20 +79,20 @@ const Modal = ({ page, item, titles, setIsModalDisplayed }) => {
 									</label>)}
 							</div>
 							<div className='modal-information-container'>
-								<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_NAME, event.target.value)}  defaultValue={settings.name} required/>
+								<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_NAME, event.target.value)}  defaultValue={settings.name} required/>
 								{page === PAGES.DESIGNS &&
                                 <>
-                                	{<input className='modal-information-input'onClick={event => changeEditValue(EDITION_TYPES.EDIT_COURSES, event.target.value)} defaultValue={settings.courses} type='number' min='0' required/> } 
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_WALES, event.target.value)} defaultValue={settings.wales} required />
+                                	{<input className='modal-information-input'onChange={event => changeEditValue(EDITION_TYPES.EDIT_COURSES, event.target.value)} defaultValue={settings.courses} type='number' min='0' required/> } 
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_WALES, event.target.value)} defaultValue={settings.wales} required />
                                 	<input className='modal-information-input' value={settings.updated} disabled />
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_USER_NAME_LAST_UPDATE, event.target.value)} defaultValue={settings.user_name_last_update} required />
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_STATUS, event.target.value)}defaultValue={settings.status} required />
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_USER_NAME_LAST_UPDATE, event.target.value)} defaultValue={settings.user_name_last_update} required />
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_STATUS, event.target.value)}defaultValue={settings.status} required />
                                 </>}
 								{page === PAGES.SETOUTS && 
                                 <>
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_MACHINE_NAME, event.target.value)} defaultValue={settings.machine_name} required/>
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_MACHINE_WIDTH, event.target.value)} defaultValue={settings.machine_width} type='number' min='0' required/>
-                                	<input className='modal-information-input' onClick={event => changeEditValue(EDITION_TYPES.EDIT_COURSES, event.target.value)} defaultValue={settings.courses} type='number' min='0' required/>
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_MACHINE_NAME, event.target.value)} defaultValue={settings.machine_name} required/>
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_MACHINE_WIDTH, event.target.value)} defaultValue={settings.machine_width} type='number' min='0' required/>
+                                	<input className='modal-information-input' onChange={event => changeEditValue(EDITION_TYPES.EDIT_COURSES, event.target.value)} defaultValue={settings.courses} type='number' min='0' required/>
                                 	<input className='modal-information-input' value={settings.updated} disabled />
                                 </>}
 							</div>
