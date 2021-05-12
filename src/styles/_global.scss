@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: $default-font-family;
+	margin: 0;
+	padding: 0;
+
+	@media(max-width: $mobiles) {
+		font-size: 14px;
+	}
+}
+
+a {
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+.app-container {
+	display: flex;
+}
+
+
