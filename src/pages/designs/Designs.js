@@ -12,7 +12,6 @@ import { PAGES, TITLES } from '../../services/enums';
 	
 const Designs = () => {
 	const { data } = useContext(SettingsContext);
-
 	return (
 		<main className='pages-main-container'>
 			{data.isLoading && 

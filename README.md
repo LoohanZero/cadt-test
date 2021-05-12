@@ -39,6 +39,14 @@ In the Designs page I tried firts to do the column title's through de json so I 
 I repeated the method on the Setouts page and decided to make the information perfectly legible before sending it to the List component so the logic would be only to display it, with barely logic except to show the modal.
 On the Modal I started doing a reducer but the dispatchs were all too similar so I decided that with a very simple and reusable function with useState I would arrive to the same result.
 When I started the modal to send the modified information back to de database I realized a context would have been better as the reducers all have similar calls (except for one or two) and the users information should be used as well in the modal when modifying the designs.
+I finally refactored the app to be made with context and i reduced a lot of repeated code, then I moved all of the small functions to a helpers file to clean the main pages, list and modal.
+Finally I tried with the tests (I was trying to make them before the front but I realized I was losing a lot of valuable time bumping into errors so I decided to keep them for last in the end, although I know it's not the procedure). I made most of the test work for the helpers except the ones that included the replaceAll function. Trying to find the reason why, I read that jest is not yet able to test it.
+I tried doing the test of the context in the designs and setouts pages but i was not able to bring the information or mock the information itself so the only thing i could do is prove that the loader is removed.
+I was able to manage all of the list test to pass except that i didn't test nulls or undefined although I know I should have and in the future I'm planning to make the reducer function.
+I do know I still have a lot to learn but I really had fun with this test and even if you don't think i have the level to work with you, I'll still get this project better to keep on learning testing as it's actually my current goal.
+
+Have a nice day and thank you for the opportunity.
+
 
 
 ## Styles
