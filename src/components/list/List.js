@@ -3,17 +3,12 @@ import './list.scss';
 import React, { useState } from 'react';
 
 import { PAGES } from '../../services/enums';
+import { getInitials } from '../../services/helpers/helpers';
 import Modal from '../modal/Modal';
-
 
 const List = ({ origin, data, users, titles }) => {
 	const [ isModalDisplayed, setIsModalDisplayed ] = useState(false);
 	const [ informationDisplayed, setInformationDisplayed ] = useState(false);
-
-	const getInitials = name => {
-		return name.split(' ').map(word => word.charAt(0)).join('');
-	};
-
 
 	const displayInformation = item => {
 		setInformationDisplayed(item);

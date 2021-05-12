@@ -33,6 +33,12 @@ const orderInformation = (dispatchData, data, page) => {
 	page === PAGES.SETOUTS && dispatchData({ type: TYPES.FORMAT_MACHINE_NAME });
 };
 
+//----------------------------- LIST HELPERS ----------------------------------
+
+const getInitials = name => {
+	return name.split(' ').map(word => word.charAt(0)).join('');
+};
+
 //----------------------------- MODAL HELPERS ----------------------------------
 
 const checkIfStatusIsIncluded = titles => {
@@ -50,4 +56,5 @@ const updateDate = () => {
 	return new Intl.DateTimeFormat('sv-SE', options).format(today).toString().replace(',', '.');
 };
 
-export { checkIfStatusIsIncluded, checkIfUserIsInDB, formatDateUpdate, formatMachineName, formatStatus, formatUpdateName, orderInformation, resortData, updateDate };
+
+export { checkIfStatusIsIncluded, checkIfUserIsInDB, formatDateUpdate, formatMachineName, formatStatus, formatUpdateName, getInitials, orderInformation, resortData, updateDate };
