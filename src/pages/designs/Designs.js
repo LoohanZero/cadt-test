@@ -20,7 +20,7 @@ const Designs = () => {
 				</div>
 			}
 			{!data.isLoading && data.designs && data.users && <List origin={PAGES.DESIGNS} data={data.designs} users={data.users} titles={TITLES.DESIGNS} />}
-            {data.error && <p className='modal-error-text'>There was an error processing the information. Please, try again later.</p>}
+			{data.error && <p className='modal-error-text'>There was an error processing the information. Please, try again later.</p>}
 		</main>
 	);
 };
