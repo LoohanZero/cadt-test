@@ -9,7 +9,7 @@ import {
 	formatStatus, 
 	formatUpdateName,
 	orderInformation,
-	resortData } from '../services/helpers';
+	resortData } from '../services/helpers/helpers';
 const SettingsContext = createContext();
 
 

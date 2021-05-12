@@ -16,7 +16,7 @@ describe('renders titles in table when I pass different title lists', () => {
 	
 		expect(screen.queryByText('Name')).toBeInTheDocument();
 		expect(screen.queryByText('Courses')).toBeInTheDocument();
-		expect(screen.queryByText('Wale')).toBeInTheDocument();
+		expect(screen.queryByText('Wales')).toBeInTheDocument();
 		expect(screen.queryByText('Last Updated')).toBeInTheDocument();
 		expect(screen.queryByText('By')).toBeInTheDocument();
 		expect(screen.queryByText('Machine Name')).not.toBeInTheDocument();

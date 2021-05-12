@@ -3,10 +3,11 @@
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom/extend-expect';
 
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
-import React from 'react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import React  from 'react';
 
-import Setouts, { reducerSetouts } from './Setouts';
+import { SettingsProvider } from '../../contexts/SettingsContext';
+import Setouts from './Setouts';
 
 const setoutsData =[ {
 	'id': 3,
@@ -25,38 +26,25 @@ const setoutsData =[ {
 	'courses': 300
 } ];
 
-beforeAll(() =>{ 
-	jest.spyOn(window, 'fetch');
-	
+
+
+
+
+test('renders list', async () => {
+	render(
+		<SettingsProvider>
+			<Setouts data={setoutsData}/>
+		</SettingsProvider>
+	);
+
+	screen.debug();
+	await waitForElementToBeRemoved(screen.findByTestId('loader'));
+	screen.debug();
+
+
+	// await wait(() => expect(screen.getByText('data-list')).toBeInTheDocument());
+	// expect(await screen.findByTestId('data-list')).toBeInTheDocument();
+	// expect(screen.findByTestId('data-list')).toBeInTheDocument();
 });
-afterAll(() => {
-	window.fetch.mockClear();
-});
-
-test('calls GetSetouts function once', async () => {
-	render(<Setouts/>);
-
-	const mockAPI = window.fetch.mockResolvedValueOnce({
-		ok: true,
-		json: async () => ({ success: true }),
-	});
-	
-	await waitFor(() => expect(mockAPI).toHaveBeenCalledWith('/setouts'));
-	expect(mockAPI).toHaveBeenCalledTimes(1);
-});
-
-
-// test('renders list', async () => {
-// 	render(<Setouts/>);
-
-// 	screen.debug();
-// 	await waitForElementToBeRemoved(screen.findByTestId('loader'));
-// 	screen.debug();
-// jest.advanceTimersByTime(3000);
-
-// await wait(() => expect(screen.getByText('data-list')).toBeInTheDocument());
-// expect(await screen.findByTestId('data-list')).toBeInTheDocument();
-// expect(screen.findByTestId('data-list')).toBeInTheDocument();
-// });
 
 

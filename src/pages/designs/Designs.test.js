@@ -2,12 +2,14 @@
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom/extend-expect';
 
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
 
+import { SettingsProvider } from '../../contexts/SettingsContext';
 import Designs from './Designs.js';
 
-const designsData = JSON.stringify([ {
+  
+const designsData = [ {
 	'courses': 900,
 	'id': 9,
 	'name': '9th Design',
@@ -26,8 +28,9 @@ const designsData = JSON.stringify([ {
 	'user_id_last_update': 2,
 	'user_name_last_update': 'John Doe',
 	'wales': 50
-} ]);
+} ];
 
+jest.useFakeTimers();
 // beforeAll(() =>{ 
 // 	jest.spyOn(window, 'fetch');
 // });
@@ -35,27 +38,17 @@ const designsData = JSON.stringify([ {
 // 	fetch.mockClear();
 // });
 
-const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve(designsData) }));
+// const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve(designsData) }));
 
-
-
-test('calls GetDesign and GetUsers functions once each', async () => {
-	render(<Designs/>);
-
-	// const mockAPI = window.fetch.mockResolvedValueOnce({
-	// 	ok: true,
-	// 	json: async () => ({ success: true }),
-	// });
-	
-	await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/designs'));
-	await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/users'));
-	expect(fetchMock).toHaveBeenCalledTimes(2);
-});
 
 
 test('renders list', async () => {
-	render(<Designs/>);
+	const wrapper = ({ children }) => (
+		<SettingsProvider>
+			{children}
+		</SettingsProvider>);
 
+	render(<Designs data={designsData}/>, { wrapper });
 
 	waitForElementToBeRemoved(screen.findByTestId('loader'));
 	screen.debug();

@@ -1,6 +1,7 @@
-import { PAGES, TYPES } from './enums';
+import { PAGES, TYPES } from '../enums';
 
-// CONTEXT HELPERS
+//----------------------------- CONTEXT HELPERS ----------------------------------
+
 const formatDateUpdate = item => {
 	const formatDMMYY = new Date(item.updated).toLocaleString('dv-MV', { year:'2-digit',month:'2-digit', day:'numeric' }).split(' ')[0];
 	return { ...item, updated: formatDMMYY };
@@ -32,10 +33,10 @@ const orderInformation = (dispatchData, data, page) => {
 	page === PAGES.SETOUTS && dispatchData({ type: TYPES.FORMAT_MACHINE_NAME });
 };
 
-// MODAL HELPERS
+//----------------------------- MODAL HELPERS ----------------------------------
 
 const checkIfStatusIsIncluded = titles => {
-	return [ ...titles, !titles.includes('Status') && 'Status' ];
+	return !titles.includes('Status') ? [ ...titles, 'Status' ] : titles;
 };
 
 const checkIfUserIsInDB = (users, name) => {

@@ -8,7 +8,7 @@ import { GrClose } from 'react-icons/gr';
 
 import SettingsContext from '../../contexts/SettingsContext';
 import { EDITION_TYPES, PAGES } from '../../services/enums';
-import { checkIfStatusIsIncluded, checkIfUserIsInDB, updateDate } from '../../services/helpers';
+import { checkIfStatusIsIncluded, checkIfUserIsInDB, updateDate } from '../../services/helpers/helpers';
 import { postData } from '../../services/postData';
 
 
@@ -60,7 +60,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 	const [ error, setError ] = useState(false);
 	const { setIsEdited } = useContext(SettingsContext);
 	const editPage = page.slice(0, -1);
-	const modalTitles = page === PAGES.DESIGNS ? checkIfStatusIsIncluded(titles) : titles;
+	const modalTitles = page === PAGES.DESIGNS && checkIfStatusIsIncluded(titles);
 	const modalRef = useRef(null);
 
 	const handleClickOutside = event => {
