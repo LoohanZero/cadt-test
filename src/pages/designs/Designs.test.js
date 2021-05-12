@@ -2,11 +2,10 @@
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom/extend-expect';
 
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
 
 import { SettingsProvider } from '../../contexts/SettingsContext';
-import { modelData } from '../../services/enums';
 import Designs from './Designs.js';
 
   
