@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import '../../index';
 
 .main-list-container {
 	max-height: 325px;
@@ -48,11 +48,13 @@
 }
 
 .list-heading .list-row-item-container {
-	justify-content: flex-start;
 
-	&:first-child {
-		@media(max-width: $mini-tablets) {
+	@media(max-width: $mini-tablets) {
+		justify-content: flex-start;
+
+		&:first-child {
 			justify-content: flex-start;
+		
 		}
 	}
 }
