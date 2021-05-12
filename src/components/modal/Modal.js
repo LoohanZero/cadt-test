@@ -137,7 +137,7 @@ const Modal = ({ page, users, item, titles, setIsModalDisplayed }) => {
 						</div>
 						{error && <p className='modal-error-text'>There was an error processing the information. Please, try again later.</p>}
 						<div className='modal-submit-button-container'>
-							{<button className='modal-submit-button' type='submit' disabled={isLoading && true} >{isLoading ? 'Processing' : 'Update'}</button> }
+							{<button className='modal-submit-button' type='submit' disabled={isLoading && true} >{isLoading ? 'Processing' : 'Update'}</button>}
 						</div>
 					</form>
                     

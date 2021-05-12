@@ -21,6 +21,7 @@ const Setouts = () => {
 			</div>
 			}
 			{!data.isLoading && data.setouts && <List origin={PAGES.SETOUTS} data={data.setouts} titles={TITLES.SETOUTS} />}
+			{data.error && <p className='modal-error-text'>There was an error processing the information. Please, try again later.</p>}
 		</main>
 	);
 };
