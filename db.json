@@ -179,15 +179,6 @@
       "updated": "2021-03-24 08:24:53.965832",
       "user_id_last_update": 1,
       "wales": 149
-    },
-    {
-      "courses": 400,
-      "id": 21,
-      "name": "IMAGINA",
-      "status": "in progress",
-      "updated": "2021-05-11 17:38:35.405",
-      "user_id_last_update": 2,
-      "wales": 100
     }
   ],
   "setouts": [
@@ -195,7 +186,7 @@
       "id": 1,
       "updated": "2021-03-24 08:44:31.810221",
       "name": "1st Setout",
-      "machine_name": "RSJ_4_1",
+      "machine_name": "Machine_4",
       "machine_width": 130,
       "courses": 200
     },
@@ -203,7 +194,7 @@
       "id": 2,
       "updated": "2021-03-25 08:44:31.810221",
       "name": "2nd Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 150,
       "courses": 300
     },
@@ -211,7 +202,7 @@
       "id": 3,
       "updated": "2021-03-26 08:44:31.810221",
       "name": "3rd Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 200,
       "courses": 250
     },
@@ -219,7 +210,7 @@
       "id": 4,
       "updated": "2021-03-27 08:44:31.810221",
       "name": "4th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 100,
       "courses": 300
     },
@@ -227,7 +218,7 @@
       "id": 5,
       "updated": "2021-03-28 08:44:31.810221",
       "name": "5th Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 3590,
       "courses": 100
     },
@@ -235,7 +226,7 @@
       "id": 6,
       "updated": "2021-03-29 08:44:31.810221",
       "name": "6th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 3000,
       "courses": 100
     },
@@ -243,7 +234,7 @@
       "id": 7,
       "updated": "2021-03-30 08:44:31.810221",
       "name": "7th Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 1000,
       "courses": 30
     },
@@ -251,7 +242,7 @@
       "id": 8,
       "updated": "2021-03-31 08:44:31.810221",
       "name": "8th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 2000,
       "courses": 50
     },
@@ -259,7 +250,7 @@
       "id": 9,
       "updated": "2021-04-01 08:44:31.810221",
       "name": "9th Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 4000,
       "courses": 1000
     },
@@ -267,7 +258,7 @@
       "id": 10,
       "updated": "2021-04-02 08:44:31.810221",
       "name": "10th Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 4000,
       "courses": 2000
     },
@@ -275,7 +266,7 @@
       "id": 11,
       "updated": "2021-04-03 08:44:31.810221",
       "name": "11st Setout",
-      "machine_name": "RSJ_4_1",
+      "machine_name": "Machine_4",
       "machine_width": 130,
       "courses": 200
     },
@@ -283,7 +274,7 @@
       "id": 12,
       "updated": "2021-04-04 08:44:31.810221",
       "name": "12th Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 150,
       "courses": 300
     },
@@ -291,7 +282,7 @@
       "id": 13,
       "updated": "2021-04-05 08:44:31.810221",
       "name": "13th Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 200,
       "courses": 250
     },
@@ -299,7 +290,7 @@
       "id": 14,
       "updated": "2021-04-06 08:44:31.810221",
       "name": "14th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 100,
       "courses": 300
     },
@@ -307,7 +298,7 @@
       "id": 15,
       "updated": "2021-04-07 08:44:31.810221",
       "name": "15th Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 3590,
       "courses": 100
     },
@@ -315,7 +306,7 @@
       "id": 16,
       "updated": "2021-04-08 08:44:31.810221",
       "name": "16th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 3000,
       "courses": 100
     },
@@ -323,7 +314,7 @@
       "id": 17,
       "updated": "2021-04-09 08:44:31.810221",
       "name": "17th Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 1000,
       "courses": 30
     },
@@ -331,7 +322,7 @@
       "id": 18,
       "updated": "2021-04-10 08:44:31.810221",
       "name": "18th Setout",
-      "machine_name": "RSF_4_2_EL",
+      "machine_name": "Machine_2",
       "machine_width": 2000,
       "courses": 50
     },
@@ -339,7 +330,7 @@
       "id": 19,
       "updated": "2021-04-11 08:44:31.810221",
       "name": "19th Setout",
-      "machine_name": "RSJ_5_1",
+      "machine_name": "Machine_1",
       "machine_width": 4000,
       "courses": 1000
     },
@@ -347,7 +338,7 @@
       "id": 20,
       "updated": "2021-04-12 08:44:31.810221",
       "name": "10th Setout",
-      "machine_name": "RSJ_4_1_ON",
+      "machine_name": "Machine_3",
       "machine_width": 4000,
       "courses": 2000
     },
@@ -382,14 +373,6 @@
       "machine_name": "RSJ 4 1 ON",
       "machine_width": "312134234234234",
       "courses": 2000
-    },
-    {
-      "id": 25,
-      "updated": "2021-05-12 19:43:22.952",
-      "name": "Lujanera",
-      "machine_name": "REFORMATING",
-      "machine_width": 2000,
-      "courses": 50
     }
   ],
   "users": [
