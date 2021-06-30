@@ -16,11 +16,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "concurrently \"react-scripts build\" \"npm run json-server\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json-server": "json-server --watch db.json --port 5000",
-    "rundevel": "concurrently \"npm run build\" \"npm run json-server\"",
+    "rundevel": "concurrently \"npm start\" \"npm run json-server\"",
     "lint:js": "npx eslint src/**/*.js --fix",
     "lint:scss": "stylelint \"**/*.scss\" --syntax scss --fix"
   },
